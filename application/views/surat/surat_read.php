@@ -4,15 +4,12 @@
         /* overrides computed width, 100px in your demo */
     }
 </style>
-<!-- <script src="<?= base_url('assets/js/tinymce.min.js'); ?>" referrerpolicy="origin"></script> -->
-
 
 <div class="row">
     <div class="col-xs-12 col-md-12">
         <?php if ($this->ion_auth->in_group(29) and (empty($nomor_agenda))) : ?>
             <form action="<?php echo site_url('surat/agenda_action'); ?>" method="post" id="formbulk">
             <?php endif ?>
-
             <ul class="timeline">
                 <li>
                     <?php if ($status == 1) : ?>
@@ -202,6 +199,9 @@
                                                 <?php else : ?>
                                                     <button type="button" id="balas_button" class="btn btn-primary" data-toggle="collapse" data-target="#balas_form"><i class="fa fa-reply"></i> Balas Surat</button>
                                                 <?php endif ?>
+                                                <?php if ($this->ion_auth->in_group(array(8)) and (!empty($nomor_agenda))) : ?>
+                                                    <button type="button" id="disposisi" class="btn btn-default" data-toggle="collapse" data-target="#disposisi_form"><i class="fa fa-calendar"></i> Disposisi Surat</button>
+                                                <?php endif; ?>
                                                 <?php if ($this->ion_auth->in_group(array(7, 17, 18, 24, 26, 28, 29, 30)) and (empty($nomor_agenda))) : ?>
                                                     <button type="button" id="agenda_button" class="btn btn-default" data-toggle="collapse" data-target="#agenda_form"><i class="fa fa-calendar"></i> Agendakan Surat</button>
                                                     <!-- tombol selesai khusus staff -->
@@ -212,9 +212,7 @@
                                                     <?php endif ?>
 
                                                 <?php else : ?>
-                                                    <?php if ($this->ion_auth->in_group(array(8)) and (!empty($nomor_agenda))) : ?>
-                                                        <button type="button" id="disposisi" class="btn btn-default" data-toggle="collapse" data-target="#disposisi_form"><i class="fa fa-calendar"></i> Disposisi Surat</button>
-                                                    <?php endif; ?>
+
                                                     <!-- tombol selesai umum -->
                                                     <?php if ($status == 1) : ?>
                                                         <a type="button" id="balas_button" class="btn btn-default" disabled><i class="fa fa-save"></i> Selesai</a>
@@ -266,154 +264,147 @@
                                                     </div>
                                                 </div>
                                             <?php endif ?>
-                                            <?php if ($this->ion_auth->in_group(array(8)) and (!empty($nomor_agenda))) : ?>
-                                                <div id="disposisi_form" class="collapse">
-                                                    <div class="box-header">
-                                                        <h3 class="box-title">Disposisi Surat</h3>
-                                                        <div class="box-tools pull-right">
-                                                            *Disposisi surat
-                                                        </div>
-                                                    </div>
-                                                    <div class="box-body">
-                                                        <div class="col-lg-8">
-                                                            <div class="form-group">
-                                                                <label for="date">Kepada<sup>*</sup> <?php echo form_error('tanggal') ?></label>
-                                                                <select class="form-control select2" required="true" name="kepada_agenda" multiple>
-                                                                    <?php foreach ($timeline_get_kepada as $lk) : ?>
-                                                                        <option value="<?php echo $lk['id'] ?>"><?php echo $lk['first_name'] ?> <?php echo $lk['last_name'] ?> (<?php echo $lk['jabatan'] ?>)</option>
-
-                                                                    <?php endforeach ?>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="varchar">Catatan<sup>*</sup></label>
-                                                                <input name="no_agenda" required="true" class="form-control"></input>
-                                                                <input type="hidden" name="id" value="<?php echo $id; ?>" />
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <input type="hidden" name="id" value="<?php echo $id; ?>" />
-                                                                <?php if ($status == 1) : ?>
-                                                                    <button type="submit" class="btn btn-primary" hidden>Simpan</button>
-                                                                <?php else : ?>
-                                                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                                                <?php endif ?>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            <?php endif ?>
-                                            <?php if ($this->ion_auth->in_group(array(7, 17, 18, 24, 26, 28, 29, 30)) and (empty($nomor_agenda))) : ?>
             </form>
-        <?php endif ?>
 
 
-        <?php if ($status == 1) : ?>
-            <div hidden>
-            <?php else : ?>
-                <div id="balas_form" class="collapse">
-                <?php endif ?>
 
-                <div class=" box-header">
-                    <div class="box-tools pull-right">
-                        *Balas Surat
+            <?php if ($status == 1) : ?>
+                <div hidden>
+                <?php else : ?>
+                    <div id="balas_form" class="collapse">
+                    <?php endif ?>
+
+                    <div class=" box-header">
+                        <div class="box-tools pull-right">
+                            *Balas Surat
+                        </div>
                     </div>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <?= form_open_multipart('surat/read_action'); ?>
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <div class="form_group" style="margin-bottom: 5px;">
-                                <button type="button" id="tambah_penerima_button" class="btn btn-xs btn-default" data-toggle="collapse" data-target="#tambah_penerima_id"><i class="fa fa-plus"></i> Tambah Penerima Baru</button>
-                                <button type="button" id="nomor_surat_button" class="btn btn-xs btn-default" data-toggle="collapse" data-target="#nomor_surat_id"><i class="fa fa-plus"></i> Tambah Nomor Surat</button>
-                            </div>
-                            <div class="form-group collapse" id="tambah_penerima_id"">
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <?= form_open_multipart('surat/read_action'); ?>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="form_group" style="margin-bottom: 5px;">
+                                    <button type="button" id="tambah_penerima_button" class="btn btn-xs btn-default" data-toggle="collapse" data-target="#tambah_penerima_id"><i class="fa fa-plus"></i> Tambah Penerima Baru</button>
+                                    <button type="button" id="nomor_surat_button" class="btn btn-xs btn-default" data-toggle="collapse" data-target="#nomor_surat_id"><i class="fa fa-plus"></i> Tambah Nomor Surat</button>
+                                </div>
+                                <div class="form-group collapse" id="tambah_penerima_id"">
                                 <label>Tambah Penerima Baru: <?php echo form_error('tanggal') ?></label>
                                 <select class=" form-control select2" name="kepada[]" multiple="multiple">
-                                <?php foreach ($timeline_get_kepada as $lk) : ?>
-                                    <option value="<?php echo $lk['id'] ?>"><?php echo $lk['first_name'] ?> <?php echo $lk['last_name'] ?> (<?php echo $lk['jabatan'] ?>)</option>
+                                    <?php foreach ($timeline_get_kepada as $lk) : ?>
+                                        <option value="<?php echo $lk['id'] ?>"><?php echo $lk['first_name'] ?> <?php echo $lk['last_name'] ?> (<?php echo $lk['jabatan'] ?>)</option>
 
-                                <?php endforeach ?>
+                                    <?php endforeach ?>
 
-                                </select>
-                            </div>
-                            <div class="form-group" hidden>
-                                <label for="date">Kepada<sup>*</sup> <?php echo form_error('tanggal') ?></label>
-                                <select class="form-control select2" required="true" name="kepada[]" multiple="multiple">
-                                    <?php if ($timeline_u) : ?>
-                                        <?php foreach ($timeline_u as $lu) : ?>
-                                            <?php if ($lu['id_penerima'] == $_SESSION['user_id']) : ?>
-
-                                                <option value="<?php echo $lu['id_pengirim'] ?>" selected><?php echo $lu['nd'] ?> <?php echo $lu['nb'] ?> (<?php echo $lu['jbtn'] ?>)</option>
-
-                                            <?php endif ?>
-                                        <?php endforeach ?>
-                                    <?php endif ?>
-                                </select>
-                            </div>
-                            <div class="form-group collapse" id="nomor_surat_id">
-                                <label for="varchar">Nomor Surat</label>
-                                <input type="text" class="form-control" name="nomor_surat" id="nomor_surat" placeholder="Nomor Surat" />
-                            </div>
-                            <div class="form-group">
-                                <label for="varchar">Isi Surat<sup>*</sup> <?php echo form_error('isi_surat') ?></label>
-                                <textarea name="isi_surat" required="true" class="textarea" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                                <!-- <textarea name="isi_surat"></textarea>
-                                <script>
-                                    tinymce.init({
-                                        selector: 'textarea',
-                                        plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
-                                        toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
-                                        toolbar_mode: 'floating',
-                                        tinycomments_mode: 'embedded',
-                                        tinycomments_author: 'Author name'
-                                    });
-                                </script> -->
-                            </div>
-
-                            <!-- tombol selesai khusus pengirim -->
-                            <!-- <?php if ($_SESSION['user_id'] == $pengirim->id_pengirim) : ?>
-                                <div class="form-group">
-                                    <input class="form-check-input" type="checkbox" value="1" name="status_surat" id="status_surat">
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        Selesai? Jika anda mencentang ini artinya surat dinyatakan selesai dan tidak bisa dibalas lagi.
-                                    </label>
+                                    </select>
                                 </div>
+
+                                <div class="form-group" hidden>
+                                    <label for="date">Kepada<sup>*</sup> <?php echo form_error('tanggal') ?></label>
+                                    <select class="form-control select2" required="true" name="kepada[]" multiple="multiple">
+                                        <?php if ($timeline_u) : ?>
+                                            <?php foreach ($timeline_u as $lu) : ?>
+                                                <?php if ($lu['id_penerima'] == $_SESSION['user_id']) : ?>
+
+                                                    <option value="<?php echo $lu['id_pengirim'] ?>" selected><?php echo $lu['nd'] ?> <?php echo $lu['nb'] ?> (<?php echo $lu['jbtn'] ?>)</option>
+
+                                                <?php endif ?>
+                                            <?php endforeach ?>
+                                        <?php endif ?>
+                                    </select>
+                                </div>
+                                <div class="form-group collapse" id="nomor_surat_id">
+                                    <label for="varchar">Nomor Surat</label>
+                                    <input type="text" class="form-control" name="nomor_surat" id="nomor_surat" placeholder="Nomor Surat" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="varchar">Isi Surat<sup>*</sup> <?php echo form_error('isi_surat') ?></label>
+                                    <textarea name="isi_surat" class="textarea" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+
+                                </div>
+
+                                <!-- tombol selesai khusus pengirim -->
+                                <!-- <?php if ($_SESSION['user_id'] == $pengirim->id_pengirim) : ?>
+                                
                             <?php endif ?> -->
 
-                            <div class="form-group">
-                                <label for="varchar">File Attachment <?php echo form_error('lampiran') ?></label>
-                                <input type="file" class="form-control-file" name="attachment[]" id="attachment" onchange="validationFileUpload(this)" />
+                                <div class="form-group">
+                                    <label for="varchar">File Attachment <?php echo form_error('lampiran') ?></label>
+                                    <input type="file" class="form-control-file" name="attachment[]" id="attachment" onchange="validationFileUpload(this)" />
+                                </div>
+                                <div id="moreUploads"></div>
+                                <div id="moreUploadsLink" style="display:none;"><a href="javascript:addFileInput();">Tambah Attachment File</a><br><br></div>
+
+                                <input type="hidden" name="id" value="<?php echo $id; ?>" />
+                                <?php if ($status == 1) : ?>
+                                    <button type="submit" class="btn btn-primary" disabled>Kirim</button>
+                                <?php else : ?>
+                                    <button type="submit" class="btn btn-primary">Kirim</button>
+                                <?php endif ?>
+                                <a href="<?php echo site_url('surat') ?>" class="btn btn-default">Cancel</a>
+
                             </div>
-                            <div id="moreUploads"></div>
-                            <div id="moreUploadsLink" style="display:none;"><a href="javascript:addFileInput();">Tambah Attachment File</a><br><br></div>
-
-                            <input type="hidden" name="id" value="<?php echo $id; ?>" />
-                            <?php if ($status == 1) : ?>
-                                <button type="submit" class="btn btn-primary" disabled>Kirim</button>
-                            <?php else : ?>
-                                <button type="submit" class="btn btn-primary">Kirim</button>
-                            <?php endif ?>
-                            <a href="<?php echo site_url('surat') ?>" class="btn btn-default">Cancel</a>
+                            <div class="col-lg-4">
+                                <h4>Keterangan</h4>
+                                <ul>
+                                    <li>Yang diberi tanda bintang wajib diisi</li>
+                                    <li>Jika upload file ingin dihapus, klik lagi upload file, kemudian pilih Cancel</li>
+                                </ul>
+                            </div>
+                            <?= form_close(); ?>
 
                         </div>
-                        <div class="col-lg-4">
-                            <h4>Keterangan</h4>
-                            <ul>
-                                <li>Yang diberi tanda bintang wajib diisi</li>
-                                <li>Jika upload file ingin dihapus, klik lagi upload file, kemudian pilih Cancel</li>
-                            </ul>
-                        </div>
-                        <?= form_close(); ?>
+                    </div>
+
                     </div>
                 </div>
 
-                </div>
-            </div>
+                <!-- disposisi -->
+                <form action="<?php echo site_url('surat/disposisi'); ?>" method="post" id="formbulk2">
+                    <?php if ($this->ion_auth->in_group(array(8)) and (!empty($nomor_agenda))) : ?>
+                        <div id="disposisi_form" class="collapse">
+                            <div class="box-header">
+                                <h3 class="box-title">Disposisi Surat</h3>
+                                <div class="box-tools pull-right">
+                                    *Disposisi surat
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="col-lg-8">
+                                    <div class="form-group">
+                                        <label for="date">Kepada<sup>*</sup></label>
+                                        <select class="form-control select2" name="kepada_disposisi" multiple>
+                                            <?php foreach ($timeline_get_kepada as $lk) : ?>
+                                                <option value="<?php echo $lk['id'] ?>"><?php echo $lk['first_name'] ?> <?php echo $lk['last_name'] ?> (<?php echo $lk['jabatan'] ?>)</option>
+
+                                            <?php endforeach ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="varchar">Catatan<sup>*</sup></label>
+                                        <input name="catatan" class="form-control"></input>
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>" />
+                                        <?php if ($status == 1) : ?>
+                                            <button type="submit" class="btn btn-primary" hidden name="submit_disposisi">Kirim</button>
+                                        <?php else : ?>
+                                            <button type="submit" name="submit_disposisi" class="btn btn-primary">Kirim</button>
+                                        <?php endif ?>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                </div>
+
+                            </div>
+                        </div>
+                    <?php endif ?>
+                    <?php if ($this->ion_auth->in_group(array(7, 17, 18, 24, 26, 28, 29, 30)) and (empty($nomor_agenda))) : ?>
+                </form>
+
+            <?php endif ?>
     </div>
 
     </li>
@@ -423,7 +414,8 @@
     </li>
     </ul>
 </div>
-</div> <!-- Add attachment file -->
+</div>
+<!-- Add attachment file -->
 <script type="text/javascript">
     var upload_number = 2;
 
@@ -465,11 +457,6 @@
     }
 </script>
 
-
-<!-- lampiran -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-
-
 <script>
     function uploadFile() {
         var file = document.getElementById("attachment").files[0];
@@ -489,10 +476,4 @@
             window.location.href = '<?php echo base_url('surat/read/') . $id; ?>';
         }
     };
-    // $("#balas_button").click(function() {
-    //     $('#balas_form').toggle("slow");
-    // });
-    // $("#agenda_button").click(function() {
-    //     $('#agenda_form').toggle("slow");
-    // });
 </script>

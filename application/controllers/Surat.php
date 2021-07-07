@@ -484,6 +484,60 @@ class Surat extends CI_Controller
             }
         }
     }
+    public function disposisi()
+    {
+        // $this->_rules_agenda();
+
+
+        $id_surat = $this->input->post('id', TRUE);
+
+        // Masukan ke tabel tujuan
+        if ($id_surat) {
+            // cek array tujuan/kepada lebih dari satu? dalam bentuk array
+            $kepada = $this->input->post('kepada_disposisi');
+            $isi = $this->input->post('catatan');
+            if ($kepada) {
+
+                $data_tujuan = array(
+                    'dari' => $this->session->userdata('user_id'), // dari user id yang login
+                    'kepada' => $kepada,
+                    'id_surat' => $id_surat,
+                    'isi' => $isi,
+                    'visibility' => "1"
+                );
+
+                $data_filter = array(
+                    'visibility' => '1'
+                );
+
+                // $arr_id = array('133', '134', '135');
+                // $arr_id = array('133', '134', '135');
+
+                $this->MTujuan->insert($data_tujuan);
+                // $this->MSurat->update($id_surat, $data);
+                // $this->MTujuan->updatebulk($data_filter, $arr_id);
+                $perihal_surat = $this->MSurat->get_perihal_surat($id_surat);
+                // Kirim notifikasi Whatsapp saat membalas surat
+                $user_pengirim = $this->ion_auth->user()->row();
+                $user_penerima = $this->ion_auth->user($kepada)->row();
+                $no_hp = $user_penerima->phone;
+                $dari = $user_pengirim->first_name . ' ' . $user_pengirim->last_name;
+                $perihal = $perihal_surat->perihal;
+                $link = base_url('surat/read/') . $id_surat;
+
+                whatsapp($no_hp, $dari, $perihal, $link);
+                redirect(site_url('surat/read/') . $id_surat);
+            } else {
+                $this->session->set_flashdata('error', 'Disposisi Gagal Terkirim!');
+                redirect(site_url('surat/read/') . $id_surat);
+            }
+        } else {
+            // jika gagal masuk ke tabel
+            $this->session->set_flashdata('error', 'Disposisi Gagal Terkirim!');
+            redirect(site_url('surat/read/') . $id_surat);
+        }
+    }
+
 
     public function create()
     {
