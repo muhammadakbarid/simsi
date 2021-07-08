@@ -228,6 +228,7 @@ class MSurat extends CI_Model
         $this->db->limit($limit, $start);
         return $this->db->get()->result();
     }
+
     function get_limit_data_eksternal($limit, $start, $q = NULL)
     {
         $this->db->select('s.*, t.kepada, t.dari,t.status as status_tujuan, (SELECT first_name from users where id = t.dari) nama_depan, (SELECT last_name from users where id = t.dari) nama_belakang');
@@ -341,22 +342,36 @@ class MSurat extends CI_Model
     }
 
 
+    function laporan_surat($limit, $start, $q = NULL, $dari, $sampai)
+    {
+        $this->db->select('s.*, t.kepada, t.dari,t.status as status_tujuan, (SELECT first_name from users where id = t.dari) nama_depan, (SELECT last_name from users where id = t.dari) nama_belakang');
+        $this->db->from('surat s');
+        $this->db->join('tujuan t', 't.id_surat = s.id');
+        $this->db->join('users u', 'u.id = t.kepada');
+        $this->db->where('t.kepada', $this->session->userdata('user_id'));
+        $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%')");
+        $this->db->where('s.tanggal >=', $dari);
+        $this->db->where('s.tanggal <=', $sampai);
+        // $this->db->where("(s.tanggal between " . $dari . " AND " . $sampai . ")");
+        $this->db->group_by('s.id');
+        $this->db->order_by($this->id, $this->order);
+        $this->db->limit($limit, $start);
+        return $this->db->get()->result();
+    }
 
-    // delete data
-    // function delete($id)
-    // {
-    //     $this->db->where($this->id, $id);
-    //     $this->db->delete($this->table);
-    // }
-
-    // // delete bulkdata
-    // function deletebulk()
-    // {
-    //     $data = $this->input->post('msg_', TRUE);
-    //     $arr_id = explode(",", $data);
-    //     $this->db->where_in($this->id, $arr_id);
-    //     return $this->db->delete($this->table);
-    // }
+    function laporan_surat_total($q = NULL, $dari, $sampai)
+    {
+        $this->db->select('s.*, t.kepada, t.dari,t.status as status_tujuan, (SELECT first_name from users where id = t.dari) nama_depan, (SELECT last_name from users where id = t.dari) nama_belakang');
+        $this->db->from('surat s');
+        $this->db->join('tujuan t', 't.id_surat = s.id');
+        $this->db->join('users u', 'u.id = t.kepada');
+        $this->db->where('t.kepada', $this->session->userdata('user_id'));
+        $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%')");
+        $this->db->where('s.tanggal >=', $dari);
+        $this->db->where('s.tanggal <=', $sampai);
+        $this->db->group_by('s.id');
+        return $this->db->get()->num_rows();
+    }
 }
 
 /* End of file MSurat.php */

@@ -93,6 +93,8 @@
   <!-- Bootstrap WYSIHTML JS -->
   <script src="<?= base_url(); ?>assets/js/bootstrap3-wysihtml5.all.min.js"></script>
 
+  <script src="<?= base_url(); ?>/assets/chart/dist/Chart.min.js"></script>
+
   <style type="text/css">
     .pagination>li>a,
     .pagination>li>span {

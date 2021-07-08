@@ -959,6 +959,56 @@ class Surat extends CI_Controller
         $data['nama_file'] = $file;
         $this->load->view('surat/view_pdf', $data);
     }
+
+    public function laporan_surat()
+    {
+
+        $q = urldecode($this->input->get('q', TRUE));
+        $start = intval($this->input->get('start'));
+
+        if ($q <> '') {
+            $config['base_url'] = base_url() . 'surat/laporan_surat?q=' . urlencode($q);
+            $config['first_url'] = base_url() . 'surat/laporan_surat?q=' . urlencode($q);
+        } else {
+            $config['base_url'] = base_url() . 'surat/laporan_surat';
+            $config['first_url'] = base_url() . 'surat/laporan_surat';
+        }
+
+        $config['per_page'] = 10;
+        $config['page_query_string'] = TRUE;
+
+        $dari = $this->input->post('dari');
+        $sampai = $this->input->post('sampai');
+
+        if ($dari) {
+            $config['total_rows'] = $this->MSurat->laporan_surat_total($q, $dari, $sampai);
+            $surat = $this->MSurat->laporan_surat($config['per_page'], $start, $q, $dari, $sampai);
+        } else {
+            $config['total_rows'] = $this->MSurat->total_rows($q);
+            $surat = $this->MSurat->get_limit_data($config['per_page'], $start, $q);
+        }
+
+        $this->load->library('pagination');
+        $this->pagination->initialize($config);
+
+        $data = array(
+            'surat_data' => $surat,
+            'q' => $q,
+            'pagination' => $this->pagination->create_links(),
+            'total_rows' => $config['total_rows'],
+            'start' => $start,
+        );
+        $data['title'] = 'Laporan';
+        $data['subtitle'] = 'Surat';
+
+        $data['search_page'] = 'surat/laporan_surat';
+        $data['crumb'] = [
+            'Surat' => '',
+        ];
+
+        $data['page'] = 'surat/laporan_surat';
+        $this->load->view('template/backend', $data);
+    }
 }
 
 

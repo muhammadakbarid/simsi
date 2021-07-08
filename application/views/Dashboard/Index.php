@@ -11,6 +11,7 @@
     Ada <strong><?= $jml_surat_selesai; ?></strong> surat telah selesai. <a href="<?= base_url('surat/selesai'); ?>">Cek Surat</a>
   </div>
 <?php endif ?>
+
 <style>
   .infobox {
     position: relative;
@@ -130,4 +131,62 @@
       <!-- /.info-box -->
     </div>
   </a>
+</div>
+
+<?php foreach ($grafik as $g) {
+  // var_dump($grafik);
+  // exit;
+  $jumlah[] = $g->Jumlah_Surat;
+  $bulan[] = cari_bulan($g->Bulan);
+} ?>
+<div class="row">
+  <div class="col-md-6">
+    <div class="nav-tabs-custom">
+      <!-- Tabs within a box -->
+      <ul class="nav nav-tabs pull-right">
+        <li class="pull-left header"><i class="fa fa-inbox"></i> Statistik Surat</li>
+      </ul>
+      <div class="tab-content no-padding">
+        <canvas id="myChart" width="200" height="100"></canvas>
+        <script>
+          var ctx = document.getElementById('myChart');
+          var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: <?= json_encode($bulan); ?>,
+              datasets: [{
+                label: '# Surat dibuat',
+                data: <?= json_encode($jumlah); ?>,
+                backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6"></div>
 </div>

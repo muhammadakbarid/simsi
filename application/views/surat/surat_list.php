@@ -1,4 +1,3 @@
-<!-- <?php print_r($surat_data); ?> -->
 <style>
     .table-row {
         cursor: pointer;

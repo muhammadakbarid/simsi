@@ -9,10 +9,15 @@ class Dashboard extends CI_Controller
 		parent::__construct();
 		$this->layout->auth();
 		$this->load->model(array('MSurat'));
+		$this->load->model('View_surat_model');
+		$this->load->model('View_jumlah_surat_model');
+		$this->load->helper('dateina');
 	}
 
 	public function index()
 	{
+		$tahun = date('Y');
+		$data['grafik'] = $this->View_jumlah_surat_model->get_all();
 		$data['jml_surat_masuk'] = $this->MSurat->total_rows();
 		$data['jml_surat_selesai'] = $this->MSurat->total_selesai();
 		$data['jml_surat_diproses'] = $this->MSurat->total_diproses();
