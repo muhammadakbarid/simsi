@@ -999,7 +999,7 @@ class Surat extends CI_Controller
             'start' => $start,
         );
         $data['title'] = 'Laporan';
-        $data['subtitle'] = 'Surat';
+        $data['subtitle'] = 'Laporan Surat';
 
         $data['search_page'] = 'surat/laporan_surat';
         $data['crumb'] = [
@@ -1007,6 +1007,106 @@ class Surat extends CI_Controller
         ];
 
         $data['page'] = 'surat/laporan_surat';
+        $this->load->view('template/backend', $data);
+    }
+
+    public function laporan_surat_harian()
+    {
+
+        $q = urldecode($this->input->get('q', TRUE));
+        $start = intval($this->input->get('start'));
+
+        if ($q <> '') {
+            $config['base_url'] = base_url() . 'surat/laporan_surat_harian?q=' . urlencode($q);
+            $config['first_url'] = base_url() . 'surat/laporan_surat_harian?q=' . urlencode($q);
+        } else {
+            $config['base_url'] = base_url() . 'surat/laporan_surat_harian';
+            $config['first_url'] = base_url() . 'surat/laporan_surat_harian';
+        }
+
+        $config['per_page'] = 10;
+        $config['page_query_string'] = TRUE;
+
+        $dari = $this->input->post('dari');
+        $sampai = $this->input->post('sampai');
+
+        if ($dari) {
+            $config['total_rows'] = $this->MSurat->laporan_surat_harian_total($q, $dari, $sampai);
+            $surat = $this->MSurat->laporan_surat_harian($config['per_page'], $start, $q, $dari, $sampai);
+        } else {
+            $config['total_rows'] = $this->MSurat->total_rows($q);
+            $surat = $this->MSurat->get_laporan_surat_harian($config['per_page'], $start, $q);
+        }
+
+        $this->load->library('pagination');
+        $this->pagination->initialize($config);
+
+        $data = array(
+            'surat_data' => $surat,
+            'q' => $q,
+            'pagination' => $this->pagination->create_links(),
+            'total_rows' => $config['total_rows'],
+            'start' => $start,
+        );
+        $data['title'] = 'Laporan';
+        $data['subtitle'] = 'Jumlah Surat Harian';
+
+        $data['search_page'] = 'surat/laporan_surat_harian';
+        $data['crumb'] = [
+            'Surat' => '',
+        ];
+
+        $data['page'] = 'surat/laporan_surat_harian';
+        $this->load->view('template/backend', $data);
+    }
+
+    public function laporan_surat_bulanan()
+    {
+
+        $q = urldecode($this->input->get('q', TRUE));
+        $start = intval($this->input->get('start'));
+
+        if ($q <> '') {
+            $config['base_url'] = base_url() . 'surat/laporan_surat_bulanan?q=' . urlencode($q);
+            $config['first_url'] = base_url() . 'surat/laporan_surat_bulanan?q=' . urlencode($q);
+        } else {
+            $config['base_url'] = base_url() . 'surat/laporan_surat_bulanan';
+            $config['first_url'] = base_url() . 'surat/laporan_surat_bulanan';
+        }
+
+        $config['per_page'] = 10;
+        $config['page_query_string'] = TRUE;
+
+        $dari = $this->input->post('dari');
+        $sampai = $this->input->post('sampai');
+
+        if ($dari) {
+            $config['total_rows'] = $this->MSurat->laporan_surat_total($q, $dari, $sampai);
+            $surat = $this->MSurat->laporan_surat($config['per_page'], $start, $q, $dari, $sampai);
+        } else {
+            $config['total_rows'] = $this->MSurat->total_rows($q);
+            $surat = $this->MSurat->get_limit_data($config['per_page'], $start, $q);
+        }
+
+        $this->load->library('pagination');
+        $this->pagination->initialize($config);
+
+        $data = array(
+            'surat_data' => $surat,
+            'q' => $q,
+            'pagination' => $this->pagination->create_links(),
+            'total_rows' => $config['total_rows'],
+            'start' => $start,
+        );
+        $data['title'] = 'Laporan';
+        $data['subtitle'] = 'Jumlah Surat Bulanan';
+
+        $data['search_page'] = 'surat/laporan_surat_bulanan';
+        $data['crumb'] = [
+            'Surat' => '',
+        ];
+
+        $data['page'] = 'surat/laporan_surat_bulanan';
         $this->load->view('template/backend', $data);
     }
 }

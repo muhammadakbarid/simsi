@@ -136,8 +136,8 @@
 <?php foreach ($grafik as $g) {
   // var_dump($grafik);
   // exit;
-  $jumlah[] = $g->Jumlah_Surat;
-  $bulan[] = cari_bulan($g->Bulan);
+  $x[] = $g->Jumlah_Surat;
+  $y[] = cari_bulan($g->Bulan);
 } ?>
 <div class="row">
   <div class="col-md-6">
@@ -153,10 +153,10 @@
           var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-              labels: <?= json_encode($bulan); ?>,
+              labels: <?= json_encode($y); ?>,
               datasets: [{
                 label: '# Surat dibuat',
-                data: <?= json_encode($jumlah); ?>,
+                data: <?= json_encode($x); ?>,
                 backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
                   'rgba(54, 162, 235, 0.2)',

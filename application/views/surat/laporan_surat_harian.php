@@ -1,3 +1,9 @@
+<?php foreach ($surat_data as $g) {
+    // var_dump($grafik);
+    // exit;
+    $y[] = $g->Tanggal;
+    $x[] = $g->Jumlah_Surat;
+} ?>
 <style>
     .table-row {
         cursor: pointer;
@@ -62,67 +68,93 @@
                         </div>
                     </form>
                 </div>
-                <form method="post" action="<?= site_url('surat/deletebulk'); ?>" id="formbulk">
-                    <div class="mailbox-messages">
-                        <table class="table table-hover" style="margin-bottom: 10px" style="width:100%">
-                            <tr>
-                                <!-- <th style="width: 10px;"><input type="checkbox" name="selectall" /></th> -->
-                                <th>
-                                    <center>No</center>
-                                </th>
-                                <th>Pengirim</th>
-                                <th>Perihal</th>
-                                <th>Nomor Surat</th>
-                                <th>Waktu Kirim</th>
-                                <th>Status</th>
-                                <!-- <th>Action</th> -->
-                            </tr>
-                            <?php
-                            foreach ($surat_data as $surat) :
-                            ?>
-                                <?php $a = site_url('surat/read/') . $surat->id;
-                                $surat_link = "class='table-row' data-href='$a'" ?>
-                                <?php if ($surat->status == 1) : ?>
-                                    <tr>
-                                    <?php elseif ($surat->status_tujuan == 0) : ?>
-                                    <tr class="bg-danger">
-                                    <?php else : ?>
-                                    <tr class=" bg-warning">
-                                    <?php endif ?>
-
-                                    <!-- <td style="width: 10px;padding-left: 8px;"><input type="checkbox" name="id" value="<?= $surat->id; ?>" />&nbsp;</td> -->
+                <div class="col-md-6">
+                    <form method="post" action="<?= site_url('surat/deletebulk'); ?>" id="formbulk">
+                        <div class="mailbox-messages">
+                            <table class="table table-hover" style="margin-bottom: 10px" style="width:100%">
+                                <tr>
+                                    <!-- <th style="width: 10px;"><input type="checkbox" name="selectall" /></th> -->
+                                    <th>
+                                        <center>No</center>
+                                    </th>
+                                    <th>Tanggal</th>
+                                    <th>Jumlah Surat</th>
+                                    <!-- <th>Action</th> -->
+                                </tr>
+                                <?php
+                                foreach ($surat_data as $surat) :
+                                ?>
+                                    <?php $a = site_url('surat/read/') . $surat->id;
+                                    $surat_link = "class='table-row' data-href='$a'" ?>
 
                                     <td <?= $surat_link; ?>>
                                         <center><?php echo ++$start ?></center>
                                     </td>
-                                    <td <?= $surat_link; ?>><strong><?php echo $surat->nama_depan . " " . $surat->nama_belakang ?></strong></td>
+                                    <td <?= $surat_link; ?>><strong><?php echo tanggal_surat($surat->Tanggal) ?></strong></td>
                                     <td <?= $surat_link; ?>>
-                                        <b><?php echo $surat->perihal ?></b>
+                                        <b><?php echo $surat->Jumlah_Surat ?></b>
                                     </td>
-                                    <td <?= $surat_link; ?>><?php echo $surat->nomor_surat ?></td>
 
-                                    <td <?= $surat_link; ?>><?php echo timeAgo($surat->post_date) ?></td>
-                                    <td <?= $surat_link; ?>>
-                                        <?php if ($surat->status == "0") : ?>
-                                            <span class="label label-warning">On Progress</span>
-                                        <?php else : ?>
-                                            <span class="label label-success">Selesai</span>
-                                        <?php endif ?>
+
                                     </td>
-                                    <!-- <td style="text-align:center">
-                                        <?php
-                                        // echo anchor(site_url('surat/read/' . $surat->id), '<i class="fa fa-search"></i>', 'class="btn btn-xs btn-primary"  data-toggle="tooltip" title="Detail"');
-                                        // echo ' ';
-                                        echo anchor(site_url('surat/delete/' . $surat->id), ' <i class="fa fa-trash"></i>', 'class="btn btn-xs btn-danger" onclick="javasciprt: return confirmdelete(\'surat/delete/' . $surat->id . '\')"  data-toggle="tooltip" title="Delete" ');
-                                        ?>
-                                    </td> -->
+
                                     </tr>
                                 <?php endforeach ?>
 
-                        </table>
-                    </div>
+                            </table>
+                        </div>
 
-                </form>
+                    </form>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="nav-tabs-custom">
+                        <!-- Tabs within a box -->
+                        <ul class="nav nav-tabs pull-right">
+                            <li class="pull-left header"><i class="fa fa-inbox"></i> Statistik Surat</li>
+                        </ul>
+                        <div class="tab-content no-padding">
+                            <canvas id="myChart" width="200" height="100"></canvas>
+                            <script>
+                                var ctx = document.getElementById('myChart');
+                                var myChart = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: <?= json_encode($y); ?>,
+                                        datasets: [{
+                                            label: '# Surat dibuat',
+                                            data: <?= json_encode($x); ?>,
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(255, 206, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(255, 99, 132, 1)',
+                                                'rgba(54, 162, 235, 1)',
+                                                'rgba(255, 206, 86, 1)',
+                                                'rgba(75, 192, 192, 1)',
+                                                'rgba(153, 102, 255, 1)',
+                                                'rgba(255, 159, 64, 1)'
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            y: {
+                                                beginAtZero: true
+                                            }
+                                        }
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <a href="#" class="btn bg-yellow">Total Record : <?php echo $total_rows ?></a>
