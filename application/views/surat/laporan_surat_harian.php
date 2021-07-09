@@ -40,7 +40,7 @@
                                     <?php
                                     if ($q <> '') {
                                     ?>
-                                        <a href="<?php echo site_url('surat'); ?>" class="btn btn-default">Reset</a>
+                                        <a href="<?php echo site_url('surat/laporan_surat_harian'); ?>" class="btn btn-default">Reset</a>
                                     <?php
                                     }
                                     ?>
@@ -52,7 +52,7 @@
                 </div>
                 <div style="margin-bottom: 10px;margin-left:10px;margin-top:60px"><label for="filter">Filter Tanggal:</label></div>
                 <div class="row" style="margin-bottom: 10px;margin-left:10px">
-                    <form action="<?php echo base_url('surat/laporan_surat'); ?>" class="form-inline" method="post">
+                    <form action="<?php echo base_url('surat/laporan_surat_harian'); ?>" class="form-inline" method="post">
                         <div class="col input-group">
                             <!-- <label><b>Filter :</b></label> -->
                             <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-calendar"></i></button></span>
@@ -68,45 +68,6 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-md-6">
-                    <form method="post" action="<?= site_url('surat/deletebulk'); ?>" id="formbulk">
-                        <div class="mailbox-messages">
-                            <table class="table table-hover" style="margin-bottom: 10px" style="width:100%">
-                                <tr>
-                                    <!-- <th style="width: 10px;"><input type="checkbox" name="selectall" /></th> -->
-                                    <th>
-                                        <center>No</center>
-                                    </th>
-                                    <th>Tanggal</th>
-                                    <th>Jumlah Surat</th>
-                                    <!-- <th>Action</th> -->
-                                </tr>
-                                <?php
-                                foreach ($surat_data as $surat) :
-                                ?>
-                                    <?php $a = site_url('surat/read/') . $surat->id;
-                                    $surat_link = "class='table-row' data-href='$a'" ?>
-
-                                    <td <?= $surat_link; ?>>
-                                        <center><?php echo ++$start ?></center>
-                                    </td>
-                                    <td <?= $surat_link; ?>><strong><?php echo tanggal_surat($surat->Tanggal) ?></strong></td>
-                                    <td <?= $surat_link; ?>>
-                                        <b><?php echo $surat->Jumlah_Surat ?></b>
-                                    </td>
-
-
-                                    </td>
-
-                                    </tr>
-                                <?php endforeach ?>
-
-                            </table>
-                        </div>
-
-                    </form>
-                </div>
-
                 <div class="col-md-6">
                     <div class="nav-tabs-custom">
                         <!-- Tabs within a box -->
@@ -155,6 +116,47 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-6">
+                    <form method="post" action="<?= site_url('surat/deletebulk'); ?>" id="formbulk">
+                        <div class="mailbox-messages">
+                            <table class="table table-hover" style="margin-bottom: 10px" style="width:100%">
+                                <tr>
+                                    <!-- <th style="width: 10px;"><input type="checkbox" name="selectall" /></th> -->
+                                    <th>
+                                        <center>No</center>
+                                    </th>
+                                    <th>Tanggal</th>
+                                    <th>Jumlah Surat</th>
+                                    <!-- <th>Action</th> -->
+                                </tr>
+                                <?php
+                                foreach ($surat_data as $surat) :
+                                ?>
+                                    <?php $a = site_url('surat/read/') . $surat->id;
+                                    $surat_link = "class='table-row' data-href='$a'" ?>
+
+                                    <td <?= $surat_link; ?>>
+                                        <center><?php echo ++$start ?></center>
+                                    </td>
+                                    <td <?= $surat_link; ?>><strong><?php echo tanggal_surat($surat->Tanggal) ?></strong></td>
+                                    <td <?= $surat_link; ?>>
+                                        <b><?php echo $surat->Jumlah_Surat ?></b>
+                                    </td>
+
+
+                                    </td>
+
+                                    </tr>
+                                <?php endforeach ?>
+
+                            </table>
+                        </div>
+
+                    </form>
+                </div>
+
+
                 <div class="row">
                     <div class="col-md-6">
                         <a href="#" class="btn bg-yellow">Total Record : <?php echo $total_rows ?></a>

@@ -1034,7 +1034,7 @@ class Surat extends CI_Controller
             $config['total_rows'] = $this->MSurat->laporan_surat_harian_total($q, $dari, $sampai);
             $surat = $this->MSurat->laporan_surat_harian($config['per_page'], $start, $q, $dari, $sampai);
         } else {
-            $config['total_rows'] = $this->MSurat->total_rows($q);
+            $config['total_rows'] = $this->MSurat->laporan_surat_harian_row($q);
             $surat = $this->MSurat->get_laporan_surat_harian($config['per_page'], $start, $q);
         }
 
@@ -1077,15 +1077,14 @@ class Surat extends CI_Controller
         $config['per_page'] = 10;
         $config['page_query_string'] = TRUE;
 
-        $dari = $this->input->post('dari');
-        $sampai = $this->input->post('sampai');
-
+        $dari =  substr($this->input->post('dari'), 0, 7);
+        $sampai = substr($this->input->post('sampai'), 0, 7);
         if ($dari) {
-            $config['total_rows'] = $this->MSurat->laporan_surat_total($q, $dari, $sampai);
-            $surat = $this->MSurat->laporan_surat($config['per_page'], $start, $q, $dari, $sampai);
+            $config['total_rows'] = $this->MSurat->laporan_surat_bulanan_total($q, $dari, $sampai);
+            $surat = $this->MSurat->laporan_surat_bulanan($config['per_page'], $start, $q, $dari, $sampai);
         } else {
-            $config['total_rows'] = $this->MSurat->total_rows($q);
-            $surat = $this->MSurat->get_limit_data($config['per_page'], $start, $q);
+            $config['total_rows'] = $this->MSurat->laporan_surat_bulanan_row($q);
+            $surat = $this->MSurat->get_laporan_surat_bulanan($config['per_page'], $start, $q);
         }
 
         $this->load->library('pagination');

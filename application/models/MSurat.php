@@ -373,42 +373,79 @@ class MSurat extends CI_Model
         return $this->db->get()->num_rows();
     }
 
+    // laporan harian
     function get_laporan_surat_harian($limit, $start, $q = NULL)
     {
         $this->db->select("*");
         $this->db->from('view_jumlah_surat_harian');
+        $this->db->where('kepada', $this->session->userdata('user_id'));
         $this->db->limit($limit, $start);
         return $this->db->get()->result();
     }
 
     function laporan_surat_harian($limit, $start, $q = NULL, $dari, $sampai)
     {
-        $this->db->select('s.*, t.kepada, t.dari,t.status as status_tujuan, (SELECT first_name from users where id = t.dari) nama_depan, (SELECT last_name from users where id = t.dari) nama_belakang');
-        $this->db->from('surat s');
-        $this->db->join('tujuan t', 't.id_surat = s.id');
-        $this->db->join('users u', 'u.id = t.kepada');
-        $this->db->where('t.kepada', $this->session->userdata('user_id'));
-        $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%')");
-        $this->db->where('s.tanggal >=', $dari);
-        $this->db->where('s.tanggal <=', $sampai);
-        // $this->db->where("(s.tanggal between " . $dari . " AND " . $sampai . ")");
-        $this->db->group_by('s.id');
-        $this->db->order_by($this->id, $this->order);
+        $this->db->select("*");
+        $this->db->from('view_jumlah_surat_harian');
+        $this->db->where('kepada', $this->session->userdata('user_id'));
+        $this->db->where('tanggal >=', $dari);
+        $this->db->where('tanggal <=', $sampai);
         $this->db->limit($limit, $start);
         return $this->db->get()->result();
     }
 
     function laporan_surat_harian_total($q = NULL, $dari, $sampai)
     {
-        $this->db->select('s.*, t.kepada, t.dari,t.status as status_tujuan, (SELECT first_name from users where id = t.dari) nama_depan, (SELECT last_name from users where id = t.dari) nama_belakang');
-        $this->db->from('surat s');
-        $this->db->join('tujuan t', 't.id_surat = s.id');
-        $this->db->join('users u', 'u.id = t.kepada');
-        $this->db->where('t.kepada', $this->session->userdata('user_id'));
-        $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%')");
-        $this->db->where('s.tanggal >=', $dari);
-        $this->db->where('s.tanggal <=', $sampai);
-        $this->db->group_by('s.id');
+        $this->db->select("*");
+        $this->db->from('view_jumlah_surat_harian');
+        $this->db->where('kepada', $this->session->userdata('user_id'));
+        $this->db->where('tanggal >=', $dari);
+        $this->db->where('tanggal <=', $sampai);
+        return $this->db->get()->num_rows();
+    }
+    function laporan_surat_harian_row($q = NULL)
+    {
+        $this->db->select("*");
+        $this->db->from('view_jumlah_surat_harian');
+        $this->db->where('kepada', $this->session->userdata('user_id'));
+        return $this->db->get()->num_rows();
+    }
+
+    // laporan bulanan
+    function get_laporan_surat_bulanan($limit, $start, $q = NULL)
+    {
+        $this->db->select("*");
+        $this->db->from('view_jumlah_surat_bulanan');
+        $this->db->where('kepada', $this->session->userdata('user_id'));
+        $this->db->limit($limit, $start);
+        return $this->db->get()->result();
+    }
+
+    function laporan_surat_bulanan($limit, $start, $q = NULL, $dari, $sampai)
+    {
+        $this->db->select("*");
+        $this->db->from('view_jumlah_surat_bulanan');
+        $this->db->where('kepada', $this->session->userdata('user_id'));
+        $this->db->where('tanggal >=', $dari);
+        $this->db->where('tanggal <=', $sampai);
+        $this->db->limit($limit, $start);
+        return $this->db->get()->result();
+    }
+
+    function laporan_surat_bulanan_total($q = NULL, $dari, $sampai)
+    {
+        $this->db->select("*");
+        $this->db->from('view_jumlah_surat_bulanan');
+        $this->db->where('kepada', $this->session->userdata('user_id'));
+        $this->db->where('tanggal >=', $dari);
+        $this->db->where('tanggal <=', $sampai);
+        return $this->db->get()->num_rows();
+    }
+    function laporan_surat_bulanan_row($q = NULL)
+    {
+        $this->db->select("*");
+        $this->db->from('view_jumlah_surat_bulanan');
+        $this->db->where('kepada', $this->session->userdata('user_id'));
         return $this->db->get()->num_rows();
     }
 }

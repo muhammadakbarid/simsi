@@ -316,6 +316,7 @@
 
   <!-- AdminLTE for demo purposes -->
   <script src="<?= base_url('assets/js/sweetalert2.all.min.js'); ?>"></script>
+
   <script>
     $(document).ready(function() {
       $('.sidebar-menu').tree()
@@ -336,6 +337,14 @@
       forceParse: 0,
       showMeridian: 1
       });
+
+      $('.formdate2').datepicker({
+        format: "yyyy-mm",
+        autoclose:true,
+        startView: "months", 
+    minViewMode: "months"
+      });
+
       $('.select2').select2();
       $('.sidebar-menu li.active').data('lte.pushmenu.active', true);
       $('#search-input').on('keyup', function() {
