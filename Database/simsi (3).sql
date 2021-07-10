@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2021 at 04:02 PM
+-- Generation Time: Jul 10, 2021 at 08:59 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -159,17 +159,47 @@ INSERT INTO `groups_menu` (`id`, `id_groups`, `id_menu`) VALUES
 (162, 26, 118),
 (163, 28, 118),
 (164, 29, 118),
-(165, 2, 127),
-(166, 7, 127),
-(167, 8, 127),
-(168, 17, 127),
-(169, 18, 127),
-(170, 24, 127),
-(171, 26, 127),
-(172, 28, 127),
-(173, 29, 127),
-(174, 30, 127),
-(175, 31, 127);
+(177, 1, 128),
+(197, 2, 127),
+(198, 7, 127),
+(199, 8, 127),
+(200, 17, 127),
+(201, 18, 127),
+(202, 24, 127),
+(203, 26, 127),
+(204, 28, 127),
+(205, 29, 127),
+(206, 30, 127),
+(207, 2, 129),
+(208, 7, 129),
+(209, 8, 129),
+(210, 17, 129),
+(211, 18, 129),
+(212, 24, 129),
+(213, 26, 129),
+(214, 28, 129),
+(215, 29, 129),
+(216, 30, 129),
+(237, 2, 131),
+(238, 7, 131),
+(239, 8, 131),
+(240, 17, 131),
+(241, 18, 131),
+(242, 24, 131),
+(243, 26, 131),
+(244, 28, 131),
+(245, 29, 131),
+(246, 30, 131),
+(247, 2, 130),
+(248, 7, 130),
+(249, 8, 130),
+(250, 17, 130),
+(251, 18, 130),
+(252, 24, 130),
+(253, 26, 130),
+(254, 28, 130),
+(255, 29, 130),
+(256, 30, 130);
 
 -- --------------------------------------------------------
 
@@ -183,13 +213,6 @@ CREATE TABLE `login_attempts` (
   `login` varchar(100) NOT NULL,
   `time` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `login_attempts`
---
-
-INSERT INTO `login_attempts` (`id`, `ip_address`, `login`, `time`) VALUES
-(74, '::1', 'admin@muhakbar.com', 1625156021);
 
 -- --------------------------------------------------------
 
@@ -216,19 +239,23 @@ CREATE TABLE `menu` (
 INSERT INTO `menu` (`id_menu`, `sort`, `level`, `parent_id`, `icon`, `label`, `link`, `id`, `id_menu_type`) VALUES
 (1, 0, 1, 0, 'empty', 'MAIN NAVIGATION', '#', '#', 1),
 (3, 1, 2, 1, 'fas fa-tachometer-alt', 'Dashboard', 'dashboard', '#', 1),
-(8, 14, 2, 40, 'fas fa-bars', 'Menu', 'cms/menu/side-menu', 'navMenu', 1),
-(40, 13, 1, 0, 'empty', 'DEV', '#', '#', 1),
-(42, 9, 2, 115, 'fas fa-users-cog', 'User dan Group', '#', '1', 1),
-(43, 10, 3, 42, 'fas fa-user-plus', 'Users', 'users', '1', 1),
-(44, 11, 3, 42, 'fas fa-users', 'Groups', 'groups', '2', 1),
-(89, 15, 2, 40, 'fas fa-th-list', 'Menu Type', 'menu_type', 'menu_type', 1),
-(115, 8, 1, 0, 'fas fa-globe', 'SETTING', '#', 'setting', 1),
+(8, 16, 2, 40, 'fas fa-bars', 'Menu', 'cms/menu/side-menu', 'navMenu', 1),
+(40, 15, 1, 0, 'empty', 'DEV', '#', '#', 1),
+(42, 12, 2, 115, 'fas fa-users-cog', 'User dan Group', '#', '1', 1),
+(43, 13, 3, 42, 'fas fa-user-plus', 'Users', 'users', '1', 1),
+(44, 14, 3, 42, 'fas fa-users', 'Groups', 'groups', '2', 1),
+(89, 17, 2, 40, 'fas fa-th-list', 'Menu Type', 'menu_type', 'menu_type', 1),
+(115, 11, 1, 0, 'fas fa-globe', 'SETTING', '#', 'setting', 1),
 (117, 2, 2, 1, 'fas fa-envelope-open-text', 'Surat Internal', 'Surat', 'surat', 1),
 (118, 6, 2, 1, 'fas fa-archive', 'Tembusan', 'Tembusan', 'Tembusan', 1),
 (119, 4, 3, 117, 'far fa-paper-plane', 'Surat Terkirim', 'surat/terkirim', '4', 1),
 (120, 3, 3, 117, 'fas fa-inbox', 'Surat Masuk', 'surat', '12', 1),
 (125, 5, 3, 117, 'fas fa-plus-circle', 'Tambah Surat', 'surat/create', '1', 1),
-(127, 7, 2, 1, 'fas fa-book', 'Laporan', 'laporan_surat', '3', 1);
+(127, 7, 2, 1, 'fas fa-book', 'Laporan', '#', '1', 1),
+(128, 18, 2, 40, 'fas fa-table', 'CRUD Generator', 'crudbuilder', '1', 1),
+(129, 8, 3, 127, 'fas fa-mail-bulk', 'Laporan Surat', 'surat/laporan_surat', '1', 1),
+(130, 9, 3, 127, 'fas fa-clock', 'Jumlah Surat Harian', 'surat/laporan_surat_harian', '1', 1),
+(131, 10, 3, 127, 'fas fa-file-archive', 'Jumlah Surat Bulanan', 'surat/laporan_surat_bulanan', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -294,16 +321,25 @@ CREATE TABLE `surat` (
 --
 
 INSERT INTO `surat` (`id`, `tanggal`, `nomor_surat`, `lampiran`, `perihal`, `isi_surat`, `nomor_agenda`, `tgl_agenda`, `post_date`, `status`, `jenis`) VALUES
-(1, '2020-09-01', '404', '1', 'asdasd', '<p>asdasdasd</p>', NULL, NULL, '2021-04-02 07:16:56', '0', 'internal'),
-(2, '2020-09-03', '404', '1', 'tes', '<p>asdasdasd</p>', NULL, NULL, '2021-04-02 07:22:42', '0', 'internal'),
-(3, '2020-09-03', '03.004/HMMI/IX/2020', '1', 'Tes Notif WA saat Kirim Surat', '<p>Tes isi Kirim Surat</p>', NULL, NULL, '2021-04-02 10:24:39', '0', 'internal'),
+(1, '2021-01-01', '404', '1', 'asdasd', '<p>asdasdasd</p>', NULL, NULL, '2021-04-02 07:16:56', '0', 'internal'),
+(2, '2021-05-03', '404', '1', 'tes', '<p>asdasdasd</p>', NULL, NULL, '2021-04-02 07:22:42', '0', 'internal'),
+(3, '2021-06-03', '03.004/HMMI/IX/2020', '1', 'Tes Notif WA saat Kirim Surat', '<p>Tes isi Kirim Surat</p>', NULL, NULL, '2021-04-02 10:24:39', '0', 'internal'),
 (4, '2021-04-29', '123', '1', 'tes balas', '<p>asdasdasdas</p>', NULL, NULL, '2021-05-25 17:03:40', '0', 'internal'),
-(5, '2020-10-01', '100', '1', 'tes balas', '<p>asdasdasd</p>', NULL, NULL, '2021-05-25 17:06:44', '0', 'internal'),
+(5, '2021-04-01', '100', '1', 'tes balas', '<p>asdasdasd</p>', NULL, NULL, '2021-05-25 17:06:44', '0', 'internal'),
 (6, '2021-06-19', '001/MI/PPI/VI/2021', '1', 'Wisuda', '<p>\r\n\r\n</p><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus error cupiditate dolor animi repellat ipsum eum et aut. Aliquam, vel? Odit magni asperiores voluptatibus expedita. Ex ratione et tempora impedit! Perferendis delectus hic a illum natus atque libero totam repellendus, officia eaque laborum at facere inventore dignissimos ex porro, expedita sed ipsa mollitia voluptatibus. Nulla ducimus maiores officiis! Repellat, exercitationem.</div><div><br></div><div><br></div><div>\r\n\r\n<div>Pariatur officiis ducimus molestias maiores sequi, aut ullam illum temporibus eaque molestiae deserunt dolores quo earum nesciunt nisi illo, aperiam corporis iste quia voluptatum dolorem ex minus? Dignissimos, aut veritatis. Voluptatem architecto blanditiis perferendis officiis, maiores facilis ab deserunt minima autem modi ad cupiditate molestias, consequatur veniam distinctio ullam voluptas quisquam fugiat a cum. Praesentium accusantium dolore iusto quis recusandae?<div><div>Optio, sit, quisquam aliquid explicabo dolorem repudiandae, beatae quae tempore eos similique ducimus. Delectus ullam dicta cupiditate, veniam, placeat modi accusamus soluta ipsum excepturi nostrum repellat incidunt minus laudantium ducimus?<br></div></div><div><br></div><div><br></div>\r\n\r\n</div></div><p></p>', NULL, NULL, '2021-06-19 12:05:03', '0', 'internal'),
 (7, '2021-06-17', '002/MI/PPI/VI/2021', '1', 'PMB', '<p>\r\n\r\n</p><div><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus error cupiditate dolor animi repellat ipsum eum et aut. Aliquam, vel? Odit magni asperiores voluptatibus expedita. Ex ratione et tempora impedit! Perferendis delectus hic a illum natus atque libero totam repellendus, officia eaque laborum at facere inventore dignissimos ex porro, expedita sed ipsa mollitia voluptatibus. Nulla ducimus maiores officiis! Repellat, exercitationem. Pariatur officiis ducimus molestias maiores sequi, aut ullam illum temporibus eaque molestiae deserunt dolores quo earum nesciunt nisi illo, aperiam corporis iste quia voluptatum dolorem ex minus? Dignissimos, aut veritatis.</div><div><br></div><div><br></div><div>Voluptatem architecto blanditiis perferendis officiis, maiores facilis ab deserunt minima autem modi ad cupiditate molestias, consequatur veniam distinctio ullam voluptas quisquam fugiat a cum. Praesentium accusantium dolore iusto quis recusandae?</div><div>Optio, sit, quisquam aliquid explicabo dolorem repudiandae, beatae quae tempore eos similique ducimus. Delectus ullam dicta cupiditate, veniam, placeat modi accusamus soluta ipsum excepturi nostrum repellat incidunt minus laudantium ducimus? Obcaecati nisi sunt pariatur quis, temporibus ab consequuntur vel, dolore magni nulla, aperiam aliquam asperiores sint eos hic sit eaque repellendus? Ipsam omnis eius fugiat modi. Accusamus repellat aut unde.</div></div>\r\n\r\n<br><p></p>', '123', '2021-06-19', '2021-06-19 12:11:46', '0', 'internal'),
 (8, '2021-06-03', '001/MI/PPI/VI/2021', '1', 'asdasd', '<p>asdasdas</p>', NULL, NULL, '2021-06-19 12:15:07', '0', 'internal'),
-(9, '2020-10-01', '003/MI/PPI/VI/2021', '1', 'dasdsad', '<p>asdsadasdasd</p>', NULL, NULL, '2021-06-20 07:51:03', '0', 'internal'),
-(10, '2020-09-03', '004/MI/PPI/VI/2021', '1', 'sadasdasd', '<p>asdsadsad</p>', '1', '2021-06-20', '2021-06-20 08:57:36', '0', 'internal');
+(9, '2021-05-01', '003/MI/PPI/VI/2021', '1', 'dasdsad', '<p>asdsadasdasd</p>', NULL, NULL, '2021-06-20 07:51:03', '0', 'internal'),
+(10, '2021-04-01', '004/MI/PPI/VI/2021', '1', 'sadasdasd', '<p>asdsadsad</p>', '1', '2021-06-20', '2021-06-20 08:57:36', '0', 'internal'),
+(11, '2021-07-06', 'HMMI/02/03', '1', 'Penyelenggaraan Ujian Akhir Semester Genap TA 2020/2021', '<p>Dengan Hormat,<br><br>Berdasarkan Surat Edaran Wadir I Politeknik Pos Indonesia Nomor 167/WD-I/PPI/VI/2021  Tanggal<br>16 Juni 2021 perihal penyelenggaraaan UAS Genap TA 2020/2021, bahwa pelaksanaan Ujian Akhir<br>Semester TA 2020/2021 akan diselenggarakan tanggal 19 – 30 Juli 2021,  dengan ketentuan sebagai<br>berikut :<br><br></p><ol><li>Sifat Ujian berbentuk Take Home Test Online yang dilaksanakan oleh dosen pengampu masing-masing.</li><li>Dosen akan memberikan soal ujian kepada mahasiswa melalui media online pada pukul 10.00-12.00 WIB sesuai dengan jadwal ujian dari BAAK (Jadwal UAS terlampir).</li><li>Lama waktu pengerjaan Take Home Test Online adalah  minimal 2 jam maksimal 24 jam.</li></ol><br>Demikian kami sampaikan untuk Saudara/I ketahui dan dilaksanakan. Terimakasih.<br><br><p></p>', NULL, NULL, '2021-07-06 14:44:09', '0', 'internal'),
+(12, '2021-07-06', 'HMMI/02/03', '1', 'Wisuda', '<p>\r\n\r\n</p><p>Dengan Hormat,<br><br>Berdasarkan Surat Edaran Wadir I Politeknik Pos Indonesia Nomor 167/WD-I/PPI/VI/2021 Tanggal<br>16 Juni 2021 perihal penyelenggaraaan UAS Genap TA 2020/2021, bahwa pelaksanaan Ujian Akhir<br>Semester TA 2020/2021 akan diselenggarakan tanggal 19 – 30 Juli 2021, dengan ketentuan sebagai<br>berikut :<br><br></p><ol><li>Sifat Ujian berbentuk Take Home Test Online yang dilaksanakan oleh dosen pengampu masing-masing.</li><li>Dosen akan memberikan soal ujian kepada mahasiswa melalui media online pada pukul 10.00-12.00 WIB sesuai dengan jadwal ujian dari BAAK (Jadwal UAS terlampir).</li><li>Lama waktu pengerjaan Take Home Test Online adalah minimal 2 jam maksimal 24 jam.</li></ol><br>Demikian kami sampaikan untuk Saudara/I ketahui dan dilaksanakan. Terimakasih.\r\n\r\n<br><p></p>', '123', '2021-07-06', '2021-07-06 14:48:59', '0', 'internal'),
+(13, '2021-01-01', 'HMMI/02/03', '1', 'Wisuda', '<p>\r\n\r\nkjasndkjnaskjdnkjasndkjnkjas dkjasndkjasndkjnaskj dkjasndkjasnkjdnkjasnd askjdnkjasnd\r\n\r\n\r\n\r\nkjasndkjnaskjdnkjasndkjnkjas dkjasndkjasndkjnaskj dkjasndkjasnkjdnkjasnd askjdnkjasnd\r\n\r\n\r\n\r\nkjasndkjnaskjdnkjasndkjnkjas dkjasndkjasndkjnaskj dkjasndkjasnkjdnkjasnd askjdnkjasnd\r\n\r\n\r\n\r\nkjasndkjnaskjdnkjasndkjnkjas dkjasndkjasndkjnaskj dkjasndkjasnkjdnkjasnd askjdnkjasnd\r\n\r\n\r\n\r\nkjasndkjnaskjdnkjasndkjnkjas dkjasndkjasndkjnaskj dkjasndkjasnkjdnkjasnd askjdnkjasnd\r\n\r\n\r\n\r\nkjasndkjnaskjdnkjasndkjnkjas dkjasndkjasndkjnaskj dkjasndkjasnkjdnkjasnd askjdnkjasnd\r\n\r\n</p>', NULL, NULL, '2021-07-07 11:15:46', '0', 'internal'),
+(14, '2021-01-22', 'HMMI/02/03', '1', 'Wisuda', '<p>\r\n\r\nkjasndkjnaskjdnkjasndkjnkjas dkjasndkjasndkjnaskj dkjasndkjasnkjdnkjasnd askjdnkjasnd\r\n\r\n<br></p>', NULL, NULL, '2021-07-07 11:16:31', '0', 'internal'),
+(15, '2021-05-12', 'HMMI/02/03', '1', 'tes balas', '<p>dfdsfdsfdsf</p>', NULL, NULL, '2021-07-07 11:24:41', '0', 'internal'),
+(16, '2021-07-09', 'HMMI/02/03', '1', 'tes balas', '<p>hjvbnvv</p>', NULL, NULL, '2021-07-07 11:38:51', '0', 'internal'),
+(17, '2021-01-01', 'HMMI/02/03', '1', 'asdasd', '<p>sdasdasdasd</p>', NULL, NULL, '2021-07-07 11:46:14', '0', 'internal'),
+(18, '2021-02-03', 'HMMI/02/03', '1', 'Wisuda', '<p>asdasdasdasdasdasdasdasd</p>', NULL, NULL, '2021-07-07 11:46:32', '0', 'internal'),
+(19, '2021-07-22', 'HMMI/02/03', '1', 'asdasd', '<p>ghcvgh</p>', NULL, NULL, '2021-07-07 11:49:27', '0', 'internal');
 
 --
 -- Triggers `surat`
@@ -327,6 +363,13 @@ CREATE TABLE `surat_lampiran` (
   `id_surat` int(11) DEFAULT NULL,
   `file_surat` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `surat_lampiran`
+--
+
+INSERT INTO `surat_lampiran` (`id`, `id_tujuan`, `id_surat`, `file_surat`) VALUES
+(1, 16, 11, 'Surat_Undangan_dan_Media_Partner_HMMI.pdf');
 
 -- --------------------------------------------------------
 
@@ -454,7 +497,7 @@ CREATE TABLE `tujuan` (
 INSERT INTO `tujuan` (`id`, `id_surat`, `dari`, `kepada`, `post_date`, `status`, `isi`, `visibility`, `note`, `status_progress`) VALUES
 (1, 1, 1, 37, '2021-04-02 14:16:56', '0', NULL, '0', NULL, '0'),
 (2, 2, 1, 37, '2021-04-02 14:22:42', '0', NULL, '0', NULL, '0'),
-(3, 3, 37, 40, '2021-04-02 17:24:39', '0', NULL, '0', NULL, '0'),
+(3, 3, 37, 40, '2021-04-02 17:24:39', '1', NULL, '0', NULL, '0'),
 (4, 4, 1, 37, '2021-05-26 00:03:40', '0', NULL, '0', NULL, '0'),
 (5, 5, 1, 37, '2021-05-26 00:06:44', '0', NULL, '0', NULL, '0'),
 (6, 6, 22, 36, '2021-06-19 19:05:03', '1', NULL, '0', NULL, '0'),
@@ -466,7 +509,26 @@ INSERT INTO `tujuan` (`id`, `id_surat`, `dari`, `kepada`, `post_date`, `status`,
 (12, 10, 22, 36, '2021-06-20 15:57:36', '0', NULL, '1', NULL, '0'),
 (13, 10, 36, 22, '2021-06-20 15:58:01', '1', '<p>sadasdsa</p>', '0', '', '0'),
 (14, 10, 36, 12, '2021-06-20 15:58:23', '1', '<div class=\'alert alert-success\'><i class=\'fa fa-check\'></i> Surat telah diagendakan.</div>', '1', NULL, '0'),
-(15, 10, 12, 36, '2021-06-20 15:59:49', '0', '<p>kjansdkj</p>', '1', '', '0');
+(15, 10, 12, 36, '2021-06-20 15:59:49', '0', '<p>kjansdkj</p>', '1', '', '0'),
+(16, 11, 44, 41, '2021-07-06 21:44:09', '1', NULL, '0', NULL, '0'),
+(17, 11, 41, 44, '2021-07-06 21:45:06', '1', '<p>siap laksanakan.. terimakasih infonya</p>', '0', '', '0'),
+(18, 11, 44, 41, '2021-07-06 21:45:55', '1', '<p>oke</p>', '0', '', '0'),
+(19, 12, 44, 43, '2021-07-06 21:48:59', '0', NULL, '1', NULL, '0'),
+(20, 12, 43, 44, '2021-07-06 21:49:23', '0', '<p>oke siap</p>', '0', '', '0'),
+(21, 12, 43, 42, '2021-07-06 21:49:57', '1', '<div class=\'alert alert-success\'><i class=\'fa fa-check\'></i> Surat telah diagendakan.</div>', '1', NULL, '0'),
+(22, 12, 42, 43, '2021-07-06 21:51:00', '0', '<p>siap laksanakan</p>', '1', '', '0'),
+(23, 12, 42, 43, '2021-07-06 22:43:19', '0', '<p>asdasdasd</p>', '1', '', '0'),
+(24, 12, 42, 43, '2021-07-06 22:44:32', '0', '<p>asdasd</p>', '1', '', '0'),
+(25, 12, 42, 41, '2021-07-06 22:59:44', '0', 'asdasd', '1', NULL, '0'),
+(26, 12, 42, 41, '2021-07-06 22:59:57', '0', 'coba disposisi', '1', NULL, '0'),
+(27, 12, 42, 40, '2021-07-06 23:00:15', '1', 'coba disposisi2', '1', NULL, '0'),
+(28, 13, 44, 44, '2021-07-07 18:15:46', '0', NULL, '0', NULL, '0'),
+(29, 14, 44, 41, '2021-07-07 18:16:31', '0', NULL, '0', NULL, '0'),
+(30, 15, 44, 40, '2021-07-07 18:24:41', '0', NULL, '0', NULL, '0'),
+(31, 16, 44, 40, '2021-07-07 18:38:51', '1', NULL, '0', NULL, '0'),
+(32, 17, 44, 40, '2021-07-07 18:46:14', '0', NULL, '0', NULL, '0'),
+(33, 18, 44, 40, '2021-07-07 18:46:32', '0', NULL, '0', NULL, '0'),
+(34, 19, 44, 40, '2021-07-07 18:49:27', '1', NULL, '0', NULL, '0');
 
 --
 -- Triggers `tujuan`
@@ -511,7 +573,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `phone`, `image`, `nik`, `jabatan`) VALUES
-(1, '127.0.0.1', 'admin@admin.com', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', 'm0vyKu2zW7L8PTG20bquF.707e055aeea8a30aca', 1541329145, 'WcHCQ5vcXwT1z99BvJUWnu', 1268889823, 1625156079, 1, 'Admin', 'istrator', '6289646817762', 'gold.png', '', 'Admin'),
+(1, '127.0.0.1', 'admin@admin.com', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', 'm0vyKu2zW7L8PTG20bquF.707e055aeea8a30aca', 1541329145, 'WcHCQ5vcXwT1z99BvJUWnu', 1268889823, 1625892915, 1, 'Admin', 'istrator', '6289646817762', 'gold.png', '', 'Admin'),
 (11, '::1', 'mrahmatuloh@poltekpos.ac.id', '$2y$08$25WqqP3CTX9wSvWgIXl4c.nGRVyrF6tjQskQIncpVbjCr1uOSpj6S', NULL, 'mrahmatuloh@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602580370, NULL, 1, 'Marwanto', 'Rahmatuloh, S.T., MT.', '6289646817762', 'default.jpg', '103.79.068', 'DEPUTI WADIR 1'),
 (12, '::1', 'aguspurnomo@poltekpos.ac.id', '$2y$08$q6GAdA8OSUbMT1JmHDVEl.anCfjqoyCZDe6mcBSs7roHOldoY9uQq', NULL, 'aguspurnomo@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602580694, 1625226566, 1, 'Dr. Ir. Agus', 'Purnomo, MT.', '6289646817762', 'default.jpg', '118.64.237', 'Direktur'),
 (13, '::1', 'dewiselviani@poltekpos.ac.id', '$2y$08$YFBLD8QKNfU3qqU0NPM4aegJPbIB/QbZJ5NKJ1tlTx85hq5jcsKAy', NULL, 'dewiselviani@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602580834, NULL, 1, 'Dewi', 'Selviani Y, SS., M.Pd.', '6289646817762', 'default.jpg', '103.80.060', 'Direktur Lembaga Sertifikasi Profesi'),
@@ -541,7 +603,13 @@ INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`
 (37, '::1', 'muhammad.akbar5999@gmail.com', '$2y$08$rXzeANODBmDonZrLt6vwb.SmD/DEUHaj3EFz4RAVTSZIZC5dyZ6Oi', NULL, 'muhammad.akbar5999@gmail.com', NULL, NULL, NULL, NULL, 1602586215, 1624175230, 1, 'Akbar', 'MI', '089646817762', 'default.jpg', '2193013', 'Mahasiswa'),
 (38, '::1', 'supono@poltekpos.ac.id', '$2y$08$zE0dNKnaU7dkLN7iYGQezuCD4KFEq7wzZE.acpZ/vs.R9AQTtH3We', NULL, 'supono@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602586274, 1604537782, 1, 'Supono', 'Syafiq', '6289646817762', 'default.jpg', '111.11.111', 'Dosen'),
 (39, '::1', 'tetyrohayati@poltekpos.ac.id', '$2y$08$PLHF3b8ZsS6CU0leU0agAe1nd0c.kHNWdXB1pcSpm8PvhR7g//aXy', NULL, 'tetyrohayati@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1603410953, NULL, 1, 'Tety', 'Rohayati', '6289646817762', 'default.jpg', '111.11.111', 'Staff Wadir 1'),
-(40, '::1', 'nazzilla@muhakbar.com', '$2y$08$Lm82kvQAM0kTsq8sUOZVvOSiLUD7zXNk5LKcXMlEH4o8rtaWJTnBK', NULL, 'nazzilla@muhakbar.com', NULL, NULL, NULL, NULL, 1617358926, NULL, 1, 'Nazzilla', 'Putri', '6289646817762', 'default.jpg', '111.11.111', 'Mahasiswa');
+(40, '::1', 'nazzilla@muhakbar.com', '$2y$08$Lm82kvQAM0kTsq8sUOZVvOSiLUD7zXNk5LKcXMlEH4o8rtaWJTnBK', NULL, 'nazzilla@muhakbar.com', NULL, NULL, NULL, NULL, 1617358926, 1625892924, 1, 'Nazzilla', 'Putri', '6289646817762', 'default.jpg', '111.11.111', 'Mahasiswa'),
+(41, '::1', 'unit01@gmail.com', '$2y$08$dCrFqvttMim95VNY3vPQm.Lj6.pwM2JiQF8RgQNWc7qOQi3Xoggtu', NULL, 'unit01@gmail.com', NULL, NULL, NULL, NULL, 1625581413, 1625625001, 1, 'Unit', '01', '89646817762', 'default.jpg', '12345666777', 'Unit'),
+(42, '::1', 'direktur01@gmail.com', '$2y$08$fntO1DA38P5.Jlpm7q/IV.BhkhDsxyr8./ECsILR37kLiO.cF4ODS', NULL, 'direktur01@gmail.com', NULL, NULL, NULL, NULL, 1625581458, 1625584245, 1, 'direktur', '01', '89646817762', 'default.jpg', '2132132136', 'Direktur'),
+(43, '::1', 'staff01@gmail.com', '$2y$08$J/brbxm72E/NGjEQZ5RJpOH81uZf./1LoCRP69IUWeBnuAwNgbOpK', NULL, 'staff01@gmail.com', NULL, NULL, NULL, NULL, 1625581595, 1625582948, 1, 'staff', '01', '89646817762', 'default.jpg', '123455665', 'Staf Direktur'),
+(44, '::1', 'unit02@gmail.com', '$2y$08$xj4oB5lkOBky4r0szAVAUO5Kkk7ZQzg9a0PdHe1UP/2uDy0ycp.9O', NULL, 'unit02@gmail.com', NULL, NULL, NULL, NULL, 1625581781, 1625656514, 1, 'Unit', '02', '89646817762', 'default.jpg', '2163761', 'Ka Prodi'),
+(45, '::1', 'aksdbkjanskjas@kjasndkj.sadasd', '$2y$08$hDWpkRHm8FuEn9vPgx925.vD.xppRvagqtfqA98uE9.vsBf1DNuva', NULL, 'aksdbkjanskjas@kjasndkj.sadasd', NULL, NULL, NULL, NULL, 1625842435, NULL, 1, 'asdsad', 'asdsad', 'asdasd', 'default.jpg', '87786876786', 'sandkjnasd'),
+(46, '::1', 'aksdbkjanskjas@kjasnsdkj.sadasd', '$2y$08$IMGLydamawCSfnACHxSSvOkh.UfrJrea5FPSLb/28fMvZNaQiKQWS', NULL, 'aksdbkjanskjas@kjasnsdkj.sadasd', NULL, NULL, NULL, NULL, 1625842464, NULL, 1, 'asdsad', 'asdsad', 'asdasd', 'default.jpg', '87786876786', 'sandkjnasd');
 
 -- --------------------------------------------------------
 
@@ -599,7 +667,98 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (62, 37, 2),
 (63, 38, 2),
 (88, 39, 31),
-(89, 40, 2);
+(89, 40, 2),
+(94, 41, 28),
+(93, 42, 8),
+(95, 43, 29),
+(96, 44, 28),
+(97, 45, 28),
+(98, 46, 28);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `view_jumlah_surat`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_jumlah_surat` (
+`Bulan` int(2)
+,`Jumlah_Surat` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `view_jumlah_surat_bulanan`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_jumlah_surat_bulanan` (
+`kepada` int(11)
+,`Tanggal` varchar(7)
+,`Jumlah_Surat` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `view_jumlah_surat_harian`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_jumlah_surat_harian` (
+`id` int(11)
+,`kepada` int(11)
+,`Tanggal` date
+,`Jumlah_Surat` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `view_surat`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_surat` (
+`id_surat` int(11)
+,`Nomor_Surat` varchar(128)
+,`Tanggal_Surat` date
+,`Perihal` varchar(200)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_jumlah_surat`
+--
+DROP TABLE IF EXISTS `view_jumlah_surat`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_jumlah_surat`  AS  select distinct month(`surat`.`tanggal`) AS `Bulan`,count(`surat`.`id`) AS `Jumlah_Surat` from `surat` where year(`surat`.`tanggal`) = year(sysdate()) group by month(`surat`.`tanggal`) order by month(`surat`.`tanggal`) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_jumlah_surat_bulanan`
+--
+DROP TABLE IF EXISTS `view_jumlah_surat_bulanan`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_jumlah_surat_bulanan`  AS  (select `tujuan`.`kepada` AS `kepada`,substr(`surat`.`tanggal`,1,7) AS `Tanggal`,count(`surat`.`id`) AS `Jumlah_Surat` from (`surat` join `tujuan` on(`surat`.`id` = `tujuan`.`id_surat`)) group by substr(`surat`.`tanggal`,1,7) order by `surat`.`tanggal` desc) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_jumlah_surat_harian`
+--
+DROP TABLE IF EXISTS `view_jumlah_surat_harian`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_jumlah_surat_harian`  AS  (select `surat`.`id` AS `id`,`tujuan`.`kepada` AS `kepada`,`surat`.`tanggal` AS `Tanggal`,count(`surat`.`id`) AS `Jumlah_Surat` from (`surat` join `tujuan` on(`surat`.`id` = `tujuan`.`id_surat`)) group by `surat`.`tanggal` order by `surat`.`tanggal` desc) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_surat`
+--
+DROP TABLE IF EXISTS `view_surat`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_surat`  AS  (select `surat`.`id` AS `id_surat`,`surat`.`nomor_surat` AS `Nomor_Surat`,`surat`.`tanggal` AS `Tanggal_Surat`,`surat`.`perihal` AS `Perihal` from `surat` where `surat`.`id` in (select distinct `tujuan`.`id_surat` from `tujuan`) order by `surat`.`id` desc) ;
 
 --
 -- Indexes for dumped tables
@@ -700,19 +859,19 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `groups_menu`
 --
 ALTER TABLE `groups_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=257;
 
 --
 -- AUTO_INCREMENT for table `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
 
 --
 -- AUTO_INCREMENT for table `menu_type`
@@ -730,13 +889,13 @@ ALTER TABLE `permission`
 -- AUTO_INCREMENT for table `surat`
 --
 ALTER TABLE `surat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `surat_lampiran`
 --
 ALTER TABLE `surat_lampiran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tembusan`
@@ -754,19 +913,19 @@ ALTER TABLE `template_notif`
 -- AUTO_INCREMENT for table `tujuan`
 --
 ALTER TABLE `tujuan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `users_groups`
 --
 ALTER TABLE `users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
