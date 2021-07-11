@@ -103,11 +103,11 @@ class Surat extends CI_Controller
         $start = intval($this->input->get('start'));
 
         if ($q <> '') {
-            $config['base_url'] = base_url() . 'surat?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'surat?q=' . urlencode($q);
+            $config['base_url'] = base_url() . 'surat/selesai?q=' . urlencode($q);
+            $config['first_url'] = base_url() . 'surat/selesai?q=' . urlencode($q);
         } else {
-            $config['base_url'] = base_url() . 'surat';
-            $config['first_url'] = base_url() . 'surat';
+            $config['base_url'] = base_url() . 'surat/selesai';
+            $config['first_url'] = base_url() . 'surat/selesai';
         }
 
         $config['per_page'] = 10;
@@ -142,11 +142,11 @@ class Surat extends CI_Controller
         $start = intval($this->input->get('start'));
 
         if ($q <> '') {
-            $config['base_url'] = base_url() . 'surat?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'surat?q=' . urlencode($q);
+            $config['base_url'] = base_url() . 'surat/diproses?q=' . urlencode($q);
+            $config['first_url'] = base_url() . 'surat/diproses?q=' . urlencode($q);
         } else {
-            $config['base_url'] = base_url() . 'surat';
-            $config['first_url'] = base_url() . 'surat';
+            $config['base_url'] = base_url() . 'surat/diproses';
+            $config['first_url'] = base_url() . 'surat/diproses';
         }
 
         $config['per_page'] = 10;
@@ -179,11 +179,11 @@ class Surat extends CI_Controller
         $start = intval($this->input->get('start'));
 
         if ($q <> '') {
-            $config['base_url'] = base_url() . 'surat?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'surat?q=' . urlencode($q);
+            $config['base_url'] = base_url() . 'surat/unread?q=' . urlencode($q);
+            $config['first_url'] = base_url() . 'surat/unread?q=' . urlencode($q);
         } else {
-            $config['base_url'] = base_url() . 'surat';
-            $config['first_url'] = base_url() . 'surat';
+            $config['base_url'] = base_url() . 'surat/unread';
+            $config['first_url'] = base_url() . 'surat/unread';
         }
 
         $config['per_page'] = 10;
@@ -217,11 +217,11 @@ class Surat extends CI_Controller
         $start = intval($this->input->get('start'));
 
         if ($q <> '') {
-            $config['base_url'] = base_url() . 'surat?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'surat?q=' . urlencode($q);
+            $config['base_url'] = base_url() . 'surat/terkirim?q=' . urlencode($q);
+            $config['first_url'] = base_url() . 'surat/terkirim?q=' . urlencode($q);
         } else {
-            $config['base_url'] = base_url() . 'surat';
-            $config['first_url'] = base_url() . 'surat';
+            $config['base_url'] = base_url() . 'surat/terkirim';
+            $config['first_url'] = base_url() . 'surat/terkirim';
         }
 
         $config['per_page'] = 10;
@@ -248,8 +248,6 @@ class Surat extends CI_Controller
         $data['page'] = 'surat/surat_list';
         $this->load->view('template/backend', $data);
     }
-
-
 
     public function read($id)
     {
@@ -537,7 +535,6 @@ class Surat extends CI_Controller
             redirect(site_url('surat/read/') . $id_surat);
         }
     }
-
 
     public function create()
     {
