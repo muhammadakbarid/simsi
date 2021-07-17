@@ -1,29 +1,29 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
-* Name:  Auth Lang - Indonesia
-*
-* Author: 	Daeng Muhammad Feisal
-*     http://daengdoang.wordpress.com
+ * Name:  Auth Lang - Indonesia
+ *
+ * Author: 	Daeng Muhammad Feisal
+ *     http://daengdoang.wordpress.com
 			daengdoang@gmail.com
 			@daengdoang
-*
-* 
-*
-* Location: http://github.com/daengdoang/ion_auth/
-*
-* Created:  21.06.2013
-*
-* Description:  Indonesia language file for Ion Auth example views
-*
-*/
+ *
+ * 
+ *
+ * Location: http://github.com/daengdoang/ion_auth/
+ *
+ * Created:  21.06.2013
+ *
+ * Description:  Indonesia language file for Ion Auth example views
+ *
+ */
 
 // Errors
 $lang['error_csrf'] = 'This form post did not pass our security checks.';
 
 // Login
 $lang['login_heading']         = 'Login';
-$lang['login_subheading']      = 'Silakan login dengan email/username dan password anda.';
-$lang['login_identity_label']  = 'Email/Username:';
+$lang['login_subheading']      = 'Silakan login dengan email dan password anda.';
+$lang['login_identity_label']  = 'Email:';
 $lang['login_password_label']  = 'Kata Sandi:';
 $lang['login_remember_label']  = 'Ingatkan Saya:';
 $lang['login_submit_btn']      = 'Login';
@@ -58,7 +58,7 @@ $lang['create_user_subheading']                        = 'Silakan masukan inform
 $lang['create_user_fname_label']                       = 'Nama Awal:';
 $lang['create_user_lname_label']                       = 'Nama Akhir:';
 $lang['create_user_company_label']                     = 'Nama Perusahaan:';
-$lang['create_user_email_label']                       = 'Surel:';
+$lang['create_user_email_label']                       = 'Email:';
 $lang['create_user_phone_label']                       = 'Telepon:';
 $lang['create_user_nik_label']                         = 'NIK:';
 $lang['create_user_jabatan_label']                     = 'Jabatan:';
@@ -89,7 +89,7 @@ $lang['edit_user_nik_label']                       = 'NIK:';
 $lang['edit_user_jabatan_label']                       = 'Jabatan:';
 $lang['edit_user_password_label']                    = 'Kata Sandi:';
 $lang['edit_user_password_confirm_label']            = 'Konfirmasi Kata Sandi:';
-$lang['edit_user_groups_heading']                    = 'Anggota dari Grup';
+$lang['edit_user_groups_heading']                    = 'Hak Akses';
 $lang['edit_user_submit_btn']                        = 'Simpan Pengguna';
 $lang['edit_user_validation_fname_label']            = 'Nama Awal';
 $lang['edit_user_validation_lname_label']            = 'Nama Akhir';
@@ -164,4 +164,3 @@ $lang['email_forgot_password_link']       = 'Ubah Kata Sandi Anda';
 // New Password Email
 $lang['email_new_password_heading']    = 'Kata Sandi Baru untuk %s';
 $lang['email_new_password_subheading'] = 'Kata Sandi and sudah diubah menjadi: %s';
-

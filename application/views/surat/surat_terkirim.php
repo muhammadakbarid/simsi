@@ -55,7 +55,7 @@
                                 <th>
                                     <center>No</center>
                                 </th>
-                                <th>Pengirim</th>
+                                <th>Penerima</th>
                                 <th>Perihal</th>
                                 <th>Nomor Surat</th>
                                 <th>Waktu Kirim</th>

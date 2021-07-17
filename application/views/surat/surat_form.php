@@ -115,7 +115,7 @@
 
 
                         <input type="hidden" name="id" value="<?php echo $id; ?>" />
-                        <button type="submit" class="btn btn-primary"><?php echo $button ?></button>
+                        <button type="submit" class="btn btn-primary">Kirim</button>
                         <a href="<?php echo site_url('surat') ?>" class="btn btn-default">Cancel</a>
 
                     </div>

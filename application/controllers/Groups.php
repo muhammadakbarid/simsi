@@ -16,8 +16,8 @@ class Groups extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Groups';
-        $data['subtitle'] = '';
+        $data['title'] = 'User dan Group';
+        $data['subtitle'] = 'Kelola Groups';
         $data['crumb'] = [
             'Dashboard' => '',
         ];
@@ -64,8 +64,8 @@ class Groups extends CI_Controller
             'name' => set_value('name'),
             'description' => set_value('description'),
         );
-        $data['title'] = 'Groups';
-        $data['subtitle'] = '';
+        $data['title'] = 'User dan Group';
+        $data['subtitle'] = 'Kelola Groups';
         $data['crumb'] = [
             'Dashboard' => '',
         ];
@@ -104,8 +104,8 @@ class Groups extends CI_Controller
                 'name' => set_value('name', $row->name),
                 'description' => set_value('description', $row->description),
             );
-            $data['title'] = 'Groups';
-            $data['subtitle'] = '';
+            $data['title'] = 'User dan Group';
+            $data['subtitle'] = 'Kelola Groups';
             $data['crumb'] = [
                 'Dashboard' => '',
             ];

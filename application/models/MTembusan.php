@@ -34,13 +34,22 @@ class MTembusan extends CI_Model
     // get total rows
     function total_rows($q = NULL)
     {
-        $this->db->select('s.id');
+        $this->db->select('s.*,t.kepada, t.dari,(SELECT first_name from users where id = t.dari) nama_depan, (SELECT last_name from users where id = t.dari) nama_belakang');
         $this->db->from('surat s');
-        $this->db->join('tembusan t', 't.id_surat = s.id');
-        $this->db->join('users u', 'u.id = t.kepada');
+        $this->db->join('tembusan te', 'te.id_surat = s.id');
+        $this->db->join('tujuan t', 't.id_surat = s.id');
+
+        if ($q) {
+            $this->db->join('users u', 't.dari=u.id');
+            $this->db->where('te.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' OR u.first_name LIKE '%" . $q . "%')");
+        } else {
+            $this->db->join('users u', 'u.id = t.kepada');
+            $this->db->where('te.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' )");
+        }
+
         $this->db->group_by('s.id');
-        $this->db->where('t.kepada', $this->session->userdata('user_id'));
-        $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' )");
         return $this->db->count_all_results();
     }
 
@@ -63,9 +72,17 @@ class MTembusan extends CI_Model
         $this->db->from('surat s');
         $this->db->join('tembusan te', 'te.id_surat = s.id');
         $this->db->join('tujuan t', 't.id_surat = s.id');
-        $this->db->join('users u', 'u.id = t.kepada');
-        $this->db->where('te.kepada', $this->session->userdata('user_id'));
-        $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' )");
+
+        if ($q) {
+            $this->db->join('users u', 't.dari=u.id');
+            $this->db->where('te.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' OR u.first_name LIKE '%" . $q . "%')");
+        } else {
+            $this->db->join('users u', 'u.id = t.kepada');
+            $this->db->where('te.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' )");
+        }
+
         $this->db->group_by('s.id');
         $this->db->order_by($this->id, $this->order);
         $this->db->limit($limit, $start);

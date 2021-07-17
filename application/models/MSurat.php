@@ -146,10 +146,16 @@ class MSurat extends CI_Model
         $this->db->select('s.id');
         $this->db->from('surat s');
         $this->db->join('tujuan t', 't.id_surat = s.id');
-        $this->db->join('users u', 'u.id = t.kepada');
+        if ($q) {
+            $this->db->join('users u', 't.dari=u.id');
+            $this->db->where('t.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' OR u.first_name LIKE '%" . $q . "%')");
+        } else {
+            $this->db->join('users u', 't.kepada=u.id');
+            $this->db->where('t.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%')");
+        }
         $this->db->group_by('s.id');
-        $this->db->where('t.kepada', $this->session->userdata('user_id'));
-        $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' )");
         return $this->db->get()->num_rows();
     }
     function total_rows_eksternal($q = NULL)
@@ -169,10 +175,16 @@ class MSurat extends CI_Model
         $this->db->select('s.id');
         $this->db->from('surat s');
         $this->db->join('tujuan t', 't.id_surat = s.id');
-        $this->db->join('users u', 'u.id = t.kepada');
+        if ($q) {
+            $this->db->join('users u', 't.kepada=u.id');
+            $this->db->where('t.dari', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' OR u.first_name LIKE '%" . $q . "%')");
+        } else {
+            $this->db->join('users u', 't.kepada=u.id');
+            $this->db->where('t.dari', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' )");
+        }
         $this->db->group_by('s.id');
-        $this->db->where('t.dari', $this->session->userdata('user_id'));
-        $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' )");
         return $this->db->get()->num_rows();
     }
     function total_selesai($q = NULL)
@@ -180,11 +192,17 @@ class MSurat extends CI_Model
         $this->db->select('s.id');
         $this->db->from('surat s');
         $this->db->join('tujuan t', 't.id_surat = s.id');
-        $this->db->join('users u', 'u.id = t.kepada');
-        $this->db->group_by('s.id');
-        $this->db->where('t.kepada', $this->session->userdata('user_id'));
+        if ($q) {
+            $this->db->join('users u', 't.dari=u.id');
+            $this->db->where('t.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' OR u.first_name LIKE '%" . $q . "%')");
+        } else {
+            $this->db->join('users u', 't.kepada=u.id');
+            $this->db->where('t.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%')");
+        }
         $this->db->where('s.status', '1');
-        $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' )");
+        $this->db->group_by('s.id');
         return $this->db->count_all_results();
     }
 
@@ -194,11 +212,17 @@ class MSurat extends CI_Model
         $this->db->select('s.id');
         $this->db->from('surat s');
         $this->db->join('tujuan t', 't.id_surat = s.id');
-        $this->db->join('users u', 'u.id = t.kepada');
-        $this->db->group_by('s.id');
-        $this->db->where('t.kepada', $this->session->userdata('user_id'));
+        if ($q) {
+            $this->db->join('users u', 't.dari=u.id');
+            $this->db->where('t.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' OR u.first_name LIKE '%" . $q . "%')");
+        } else {
+            $this->db->join('users u', 't.kepada=u.id');
+            $this->db->where('t.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%')");
+        }
         $this->db->where('s.status', '0');
-        $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' )");
+        $this->db->group_by('s.id');
         return $this->db->count_all_results();
     }
     function total_unread($q = NULL)
@@ -206,11 +230,17 @@ class MSurat extends CI_Model
         $this->db->select('s.id');
         $this->db->from('surat s');
         $this->db->join('tujuan t', 't.id_surat = s.id');
-        $this->db->join('users u', 'u.id = t.kepada');
-        $this->db->group_by('s.id');
-        $this->db->where('t.kepada', $this->session->userdata('user_id'));
+        if ($q) {
+            $this->db->join('users u', 't.dari=u.id');
+            $this->db->where('t.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' OR u.first_name LIKE '%" . $q . "%')");
+        } else {
+            $this->db->join('users u', 't.kepada=u.id');
+            $this->db->where('t.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%')");
+        }
         $this->db->where('t.status', '0');
-        $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' )");
+        $this->db->group_by('s.id');
         return $this->db->count_all_results();
     }
 
@@ -219,10 +249,17 @@ class MSurat extends CI_Model
     {
         $this->db->select('s.*, t.kepada, t.dari,t.status as status_tujuan, (SELECT first_name from users where id = t.dari) nama_depan, (SELECT last_name from users where id = t.dari) nama_belakang');
         $this->db->from('surat s');
-        $this->db->join('tujuan t', 't.id_surat = s.id');
-        $this->db->join('users u', 'u.id = t.kepada');
-        $this->db->where('t.kepada', $this->session->userdata('user_id'));
-        $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%')");
+        $this->db->join('tujuan t', 's.id=t.id_surat');
+
+        if ($q) {
+            $this->db->join('users u', 't.dari=u.id');
+            $this->db->where('t.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' OR u.first_name LIKE '%" . $q . "%')");
+        } else {
+            $this->db->join('users u', 't.kepada=u.id');
+            $this->db->where('t.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%')");
+        }
         $this->db->group_by('s.id');
         $this->db->order_by($this->id, $this->order);
         $this->db->limit($limit, $start);
@@ -250,10 +287,16 @@ class MSurat extends CI_Model
         $this->db->select('s.*, t.kepada, t.dari,t.status as status_tujuan, (SELECT first_name from users where id = t.dari) nama_depan, (SELECT last_name from users where id = t.dari) nama_belakang');
         $this->db->from('surat s');
         $this->db->join('tujuan t', 't.id_surat = s.id');
-        $this->db->join('users u', 'u.id = t.kepada');
-        $this->db->where('t.kepada', $this->session->userdata('user_id'));
+        if ($q) {
+            $this->db->join('users u', 't.dari=u.id');
+            $this->db->where('t.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' OR u.first_name LIKE '%" . $q . "%')");
+        } else {
+            $this->db->join('users u', 't.kepada=u.id');
+            $this->db->where('t.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%')");
+        }
         $this->db->where('s.status', '1');
-        $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' )");
         $this->db->group_by('s.id');
         $this->db->order_by($this->id, $this->order);
         return $this->db->get()->result();
@@ -263,10 +306,16 @@ class MSurat extends CI_Model
         $this->db->select('s.*, t.kepada, t.dari,t.status as status_tujuan, (SELECT first_name from users where id = t.dari) nama_depan, (SELECT last_name from users where id = t.dari) nama_belakang');
         $this->db->from('surat s');
         $this->db->join('tujuan t', 't.id_surat = s.id');
-        $this->db->join('users u', 'u.id = t.kepada');
-        $this->db->where('t.kepada', $this->session->userdata('user_id'));
+        if ($q) {
+            $this->db->join('users u', 't.dari=u.id');
+            $this->db->where('t.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' OR u.first_name LIKE '%" . $q . "%')");
+        } else {
+            $this->db->join('users u', 't.kepada=u.id');
+            $this->db->where('t.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%')");
+        }
         $this->db->where('s.status', '0');
-        $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' )");
         $this->db->group_by('s.id');
         $this->db->order_by($this->id, $this->order);
         return $this->db->get()->result();
@@ -276,10 +325,16 @@ class MSurat extends CI_Model
         $this->db->select('s.*, t.kepada, t.dari,t.status as status_tujuan, (SELECT first_name from users where id = t.dari) nama_depan, (SELECT last_name from users where id = t.dari) nama_belakang');
         $this->db->from('surat s');
         $this->db->join('tujuan t', 't.id_surat = s.id');
-        $this->db->join('users u', 'u.id = t.kepada');
-        $this->db->where('t.kepada', $this->session->userdata('user_id'));
+        if ($q) {
+            $this->db->join('users u', 't.dari=u.id');
+            $this->db->where('t.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' OR u.first_name LIKE '%" . $q . "%')");
+        } else {
+            $this->db->join('users u', 't.kepada=u.id');
+            $this->db->where('t.kepada', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%')");
+        }
         $this->db->where('t.status', '0');
-        $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' )");
         $this->db->group_by('s.id');
         $this->db->order_by($this->id, $this->order);
         return $this->db->get()->result();
@@ -288,12 +343,23 @@ class MSurat extends CI_Model
     // get data with limit and search
     function get_surat_terkirim($limit, $start = 0, $q = NULL)
     {
-        $this->db->select('s.*, t.kepada, t.dari,t.status as status_tujuan, (SELECT first_name from users where id = t.dari) nama_depan, (SELECT last_name from users where id = t.dari) nama_belakang');
+        $this->db->select('s.*, t.kepada, t.dari,t.status as status_tujuan, (SELECT first_name from users where id = t.kepada) nama_depan, (SELECT last_name from users where id = t.kepada) nama_belakang');
         $this->db->from('surat s');
-        $this->db->join('tujuan t', 't.id_surat = s.id');
-        $this->db->join('users u', 'u.id = t.kepada');
-        $this->db->where('t.dari', $this->session->userdata('user_id'));
-        $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' )");
+        $this->db->join('tujuan t', 's.id=t.id_surat');
+        // $this->db->join('users u', 't.kepada=u.id');
+        // $this->db->where('t.dari', $this->session->userdata('user_id'));
+        // $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' )");
+
+        if ($q) {
+            $this->db->join('users u', 't.kepada=u.id');
+            $this->db->where('t.dari', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' OR u.first_name LIKE '%" . $q . "%')");
+        } else {
+            $this->db->join('users u', 't.kepada=u.id');
+            $this->db->where('t.dari', $this->session->userdata('user_id'));
+            $this->db->where("(s.perihal LIKE '%" . $q . "%' OR nomor_surat LIKE '%" . $q . "%' )");
+        }
+
         $this->db->group_by('s.id');
         $this->db->order_by($this->id, $this->order);
         $this->db->limit($limit, $start);

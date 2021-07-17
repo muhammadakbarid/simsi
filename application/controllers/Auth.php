@@ -393,6 +393,7 @@ class Auth extends CI_Controller
 
 		$tables = $this->config->item('tables', 'ion_auth');
 		$identity_column = $this->config->item('identity', 'ion_auth');
+		$groups = $this->ion_auth->groups()->result_array();
 		$this->data['identity_column'] = $identity_column;
 
 		// validate form input
@@ -426,8 +427,10 @@ class Auth extends CI_Controller
 				'jabatan' => $this->input->post('jabatan'),
 				// 'foto' => $this->input->post('foto'),
 			);
+
+			$hak_akses = $this->input->post('groups[]');
 		}
-		if ($this->form_validation->run() === TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data)) {
+		if ($this->form_validation->run() === TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data, $hak_akses)) {
 			// check to see if we are creating the user
 			// redirect them back to the admin page
 			$this->session->set_flashdata('success', $this->ion_auth->messages());
@@ -437,7 +440,7 @@ class Auth extends CI_Controller
 			// display the create user form
 			// set the flash data error message if there is one
 			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
-
+			$this->data['groups'] = $groups;
 			$this->data['first_name'] = array(
 				'name' => 'first_name',
 				'id' => 'first_name',
@@ -626,6 +629,7 @@ class Auth extends CI_Controller
 		$this->data['groups'] = $groups;
 		$this->data['currentGroups'] = $currentGroups;
 
+
 		$this->data['first_name'] = array(
 			'name'  => 'first_name',
 			'id'    => 'first_name',
@@ -687,7 +691,8 @@ class Auth extends CI_Controller
 		$this->data['crumb'] = [
 			'User' => '',
 		];
-
+		$this->data['title'] = 'User dan Group';
+		$this->data['subtitle'] = 'Kelola Users';
 		$this->data['page'] = 'auth/edit_user';
 		$this->load->view('template/backend', $this->data);
 		//$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'edit_user', $this->data);

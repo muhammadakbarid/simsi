@@ -45,6 +45,7 @@
                 </form>
             </div>
         </div>
+        
         <form method="post" action="<?= site_url('view_jumlah_surat/deletebulk');?>" id="formbulk">
         <table class="table table-bordered" style="margin-bottom: 10px" style="width:100%">
             <tr>

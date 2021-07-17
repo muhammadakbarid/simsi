@@ -207,7 +207,7 @@ class Surat extends CI_Controller
             'Surat' => '',
         ];
         $data['search_page'] = 'surat/unread';
-        $data['page'] = 'surat/surat_list';
+        $data['page'] = 'surat/surat_terkirim';
         $this->load->view('template/backend', $data);
     }
 
@@ -245,7 +245,7 @@ class Surat extends CI_Controller
             'Surat' => '',
         ];
         $data['search_page'] = 'surat/terkirim';
-        $data['page'] = 'surat/surat_list';
+        $data['page'] = 'surat/surat_terkirim';
         $this->load->view('template/backend', $data);
     }
 
@@ -550,8 +550,8 @@ class Surat extends CI_Controller
             'tgl_agenda' => set_value('tgl_agenda'),
             'isi_surat' => set_value('isi_surat'),
         );
-        $data['title'] = 'Surat';
-        $data['subtitle'] = '';
+        $data['title'] = 'Surat Internal';
+        $data['subtitle'] = 'Surat Masuk';
         $data['crumb'] = [
             'Dashboard' => '',
         ];
