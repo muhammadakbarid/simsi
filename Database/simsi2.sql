@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2021 at 12:53 PM
+-- Generation Time: Jul 25, 2021 at 03:54 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -214,14 +214,6 @@ CREATE TABLE `login_attempts` (
   `time` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `login_attempts`
---
-
-INSERT INTO `login_attempts` (`id`, `ip_address`, `login`, `time`) VALUES
-(77, '::1', 'hilman@poltekpos.ac.id', 1626516581),
-(78, '::1', 'hilman@poltekpos.ac.id', 1626516589);
-
 -- --------------------------------------------------------
 
 --
@@ -350,7 +342,12 @@ INSERT INTO `surat` (`id`, `tanggal`, `nomor_surat`, `lampiran`, `perihal`, `isi
 (19, '2021-07-22', 'HMMI/02/03', '1', 'asdasd', '<p>ghcvgh</p>', NULL, NULL, '2021-07-07 11:49:27', '0', 'internal'),
 (20, '2021-07-10', 'HMMI/02/07', '1', 'Wisuda', '<p>sadsad</p>', NULL, NULL, '2021-07-17 09:48:58', '0', 'internal'),
 (21, '2021-07-17', 'HMMI/02/07', '1', 'tes balas', '<p>asdasdsadas</p>', NULL, NULL, '2021-07-17 10:11:22', '0', 'internal'),
-(22, '2021-07-17', 'HMMI/02/07', '1', 'sadsadasdasd', '<p>asdasdasdasd</p>', NULL, NULL, '2021-07-17 10:12:25', '0', 'internal');
+(22, '2021-07-17', 'HMMI/02/07', '1', 'sadsadasdasd', '<p>asdasdasdasd</p>', NULL, NULL, '2021-07-17 10:12:25', '0', 'internal'),
+(23, '2021-07-15', 'Muhammad', '1', 'asdasd', '<p>asdasdasd</p>', NULL, NULL, '2021-07-20 12:42:58', '0', 'internal'),
+(24, '2021-07-15', 'HMMI/02/07', '1', 'asdasdas', '<p>asdasdasdasd</p>', NULL, NULL, '2021-07-20 12:47:33', '0', 'internal'),
+(25, '2021-07-14', 'HMMI/02/07', '1', 'tes balas', '<p>asdasdas</p>', NULL, NULL, '2021-07-20 12:51:04', '0', 'internal'),
+(26, '2021-07-21', 'HMMI/02/07', '1', 'Wisuda', '<p>hasbdhjbajshdbjasbdjhasbd</p>', '1', '2021-07-21', '2021-07-21 05:35:08', '1', 'internal'),
+(27, '2021-07-21', 'HMMI/02/07', '1', 'Wisuda', '<p>isi surat</p>', '2', '2021-07-21', '2021-07-21 08:37:59', '1', 'internal');
 
 --
 -- Triggers `surat`
@@ -380,7 +377,9 @@ CREATE TABLE `surat_lampiran` (
 --
 
 INSERT INTO `surat_lampiran` (`id`, `id_tujuan`, `id_surat`, `file_surat`) VALUES
-(1, 16, 11, 'Surat_Undangan_dan_Media_Partner_HMMI.pdf');
+(1, 16, 11, 'Surat_Undangan_dan_Media_Partner_HMMI.pdf'),
+(2, 43, 26, '813919.jpg'),
+(3, 48, 27, 'UU_Nomor_24_Tahun_2009.pdf');
 
 -- --------------------------------------------------------
 
@@ -400,7 +399,8 @@ CREATE TABLE `tembusan` (
 
 INSERT INTO `tembusan` (`id`, `id_surat`, `kepada`) VALUES
 (1, 21, 22),
-(2, 22, 22);
+(2, 22, 22),
+(3, 27, 37);
 
 --
 -- Triggers `tembusan`
@@ -523,7 +523,7 @@ INSERT INTO `tujuan` (`id`, `id_surat`, `dari`, `kepada`, `post_date`, `status`,
 (7, 7, 22, 36, '2021-06-19 19:11:46', '1', NULL, '1', NULL, '0'),
 (8, 8, 22, 37, '2021-06-19 19:15:07', '1', NULL, '0', NULL, '0'),
 (9, 7, 36, 22, '2021-06-19 20:38:06', '1', '<p>asik</p>', '0', '', '0'),
-(10, 7, 36, 12, '2021-06-19 20:38:31', '0', '<div class=\'alert alert-success\'><i class=\'fa fa-check\'></i> Surat telah diagendakan.</div>', '1', NULL, '0'),
+(10, 7, 36, 12, '2021-06-19 20:38:31', '1', '<div class=\'alert alert-success\'><i class=\'fa fa-check\'></i> Surat telah diagendakan.</div>', '1', NULL, '0'),
 (11, 9, 22, 37, '2021-06-20 14:51:03', '0', NULL, '0', NULL, '0'),
 (12, 10, 22, 36, '2021-06-20 15:57:36', '0', NULL, '1', NULL, '0'),
 (13, 10, 36, 22, '2021-06-20 15:58:01', '1', '<p>sadasdsa</p>', '0', '', '0'),
@@ -550,7 +550,22 @@ INSERT INTO `tujuan` (`id`, `id_surat`, `dari`, `kepada`, `post_date`, `status`,
 (34, 19, 44, 40, '2021-07-07 18:49:27', '1', NULL, '0', NULL, '0'),
 (35, 20, 40, 43, '2021-07-17 16:48:58', '0', NULL, '0', NULL, '0'),
 (36, 21, 44, 43, '2021-07-17 17:11:22', '0', NULL, '0', NULL, '0'),
-(37, 22, 40, 44, '2021-07-17 17:12:25', '0', NULL, '0', NULL, '0');
+(37, 22, 40, 44, '2021-07-17 17:12:25', '0', NULL, '0', NULL, '0'),
+(38, 23, 40, 37, '2021-07-20 19:42:58', '0', NULL, '0', NULL, '0'),
+(39, 24, 40, 37, '2021-07-20 19:47:33', '0', NULL, '0', NULL, '0'),
+(40, 25, 40, 37, '2021-07-20 19:51:04', '0', NULL, '0', NULL, '0'),
+(41, 26, 22, 36, '2021-07-21 12:35:08', '1', NULL, '1', NULL, '1'),
+(42, 26, 36, 22, '2021-07-21 12:41:29', '1', '<p>minta lampiran surat wisuda</p>', '0', '', '1'),
+(43, 26, 22, 36, '2021-07-21 12:46:51', '1', '<p>berikut saya lampirkan</p>', '1', '', '1'),
+(44, 26, 36, 12, '2021-07-21 12:48:10', '1', '<div class=\'alert alert-success\'><i class=\'fa fa-check\'></i> Surat telah diagendakan.</div>', '1', NULL, '1'),
+(45, 26, 12, 36, '2021-07-21 12:48:42', '1', '<p>saya setuju</p>', '1', '', '1'),
+(46, 26, 12, 29, '2021-07-21 12:49:31', '1', 'tolong di tindak lanjuti', '1', NULL, '1'),
+(47, 26, 29, 12, '2021-07-21 12:52:27', '1', '<p>sudah saya tindak lanjuti</p>', '1', '', '1'),
+(48, 27, 22, 36, '2021-07-21 15:37:59', '1', NULL, '1', NULL, '1'),
+(49, 27, 36, 22, '2021-07-21 15:39:31', '1', '<p>sudah lengkap</p>', '0', '', '1'),
+(50, 27, 36, 12, '2021-07-21 15:39:53', '1', '<div class=\'alert alert-success\'><i class=\'fa fa-check\'></i> Surat telah diagendakan.</div>', '1', NULL, '1'),
+(51, 27, 12, 35, '2021-07-21 15:41:00', '1', 'tolong di tindak lanjuti', '1', NULL, '1'),
+(52, 27, 35, 12, '2021-07-21 15:41:44', '1', '<p>saya tindak lanjuti</p>', '1', '', '1');
 
 --
 -- Triggers `tujuan`
@@ -595,9 +610,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `phone`, `image`, `nik`, `jabatan`) VALUES
-(1, '127.0.0.1', 'admin@admin.com', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', 'm0vyKu2zW7L8PTG20bquF.707e055aeea8a30aca', 1541329145, 'WcHCQ5vcXwT1z99BvJUWnu', 1268889823, 1626518093, 1, 'Admin', 'istrator', '6289646817762', 'gold.png', '', 'Admin'),
+(1, '127.0.0.1', 'admin@admin.com', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', 'm0vyKu2zW7L8PTG20bquF.707e055aeea8a30aca', 1541329145, 'WcHCQ5vcXwT1z99BvJUWnu', 1268889823, 1626846704, 1, 'Admin', 'istrator', '6289646817762', 'gold.png', '', 'Admin'),
 (11, '::1', 'mrahmatuloh@poltekpos.ac.id', '$2y$08$25WqqP3CTX9wSvWgIXl4c.nGRVyrF6tjQskQIncpVbjCr1uOSpj6S', NULL, 'mrahmatuloh@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602580370, NULL, 1, 'Marwanto', 'Rahmatuloh, S.T., MT.', '6289646817762', 'default.jpg', '103.79.068', 'DEPUTI WADIR 1'),
-(12, '::1', 'aguspurnomo@poltekpos.ac.id', '$2y$08$q6GAdA8OSUbMT1JmHDVEl.anCfjqoyCZDe6mcBSs7roHOldoY9uQq', NULL, 'aguspurnomo@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602580694, 1626518921, 1, 'Dr. Ir. Agus', 'Purnomo, MT.', '6289646817762', 'default.jpg', '118.64.237', 'Direktur'),
+(12, '::1', 'aguspurnomo@poltekpos.ac.id', '$2y$08$q6GAdA8OSUbMT1JmHDVEl.anCfjqoyCZDe6mcBSs7roHOldoY9uQq', NULL, 'aguspurnomo@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602580694, 1626857221, 1, 'Dr. Ir. Agus', 'Purnomo, MT.', '6289646817762', 'default.jpg', '118.64.237', 'Direktur'),
 (13, '::1', 'dewiselviani@poltekpos.ac.id', '$2y$08$YFBLD8QKNfU3qqU0NPM4aegJPbIB/QbZJ5NKJ1tlTx85hq5jcsKAy', NULL, 'dewiselviani@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602580834, NULL, 1, 'Dewi', 'Selviani Y, SS., M.Pd.', '6289646817762', 'default.jpg', '103.80.060', 'Direktur Lembaga Sertifikasi Profesi'),
 (14, '::1', 'indrafirmansyah@poltekpos.ac.id', '$2y$08$IAFNUdaLWxyKFNNQzqS.s.zPjph.x3tw6pbNvBvZYw7WGGWV1vDb.', NULL, 'indrafirmansyah@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602580917, NULL, 1, 'Dr. Indra', 'Firmansyah, SE., MM.Ak.CA', '6289646817762', 'default.jpg', '107.72.119', 'Kepala Hubungan Masyarakat'),
 (15, '::1', 'pretydiawati@poltekpos.ac.id', '$2y$08$ZT4FCtn/fADkehrFH9eaku.AwH1Xm7HSycZBRviZ3zt6JoQV/deoa', NULL, 'pretydiawati@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602581114, NULL, 1, 'Dr. Prety', 'Diawati, S.Sos., MM.', '6289646817762', 'default.jpg', '113.75.108', 'Ketua Prodi D4 Manajemen Bisnis'),
@@ -607,31 +622,29 @@ INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`
 (19, '::1', 'yusrilhelmi@poltekpos.ac.id', '$2y$08$i.Rli9hHRl0Nfy9BW3WIE.I6xBM1Nyk/wb/Jeab64iz9L9kyZjJa6', NULL, 'yusrilhelmi@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602582101, NULL, 1, 'Muhammad Yusril', 'Helmi Setyawan, S.Kom., M.Kom.', '6289646817762', 'default.jpg', '113.74.163', 'Ketua Prodi D4 Teknik Informatika'),
 (20, '::1', 'rima@poltekpos.ac.id', '$2y$08$2ePlWan.fKu0ykHLs/nUY.EvKnSQgpcMSF.P48fSium6uMq5Yq5u.', NULL, 'rima@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602582372, NULL, 1, 'Rima', 'Sundari, SE., M.Ak.', '6289646817762', 'default.jpg', '113.78.164', 'Ketua Prodi Akuntansi Keuangan'),
 (21, '::1', 'suparnosaputra@poltekpos.ac.id', '$2y$08$uimfoBR2GbgXLflB08xRrO8yro7BD8VU/Ta7.U9Jh2vxgSYsqWaTS', NULL, 'suparnosaputra@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602582455, NULL, 1, 'Suparno', 'Saputra, SE., MM.', '6289646817762', 'default.jpg', '101.58.004', 'Ketua Prodi D3 Manajemen Pemasaran'),
-(22, '::1', 'virdiandry@poltekpos.ac.id', '$2y$08$VBkAezIK8mvI67u8Ag4i/eUeM4UimkajzEahTcq0iG9MJbiF1ReJW', NULL, 'virdiandry@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602582502, 1626519045, 1, 'Virdiandry', 'Putratama, ST., M.Kom.', '6289646817762', 'default.jpg', '116.86.227', 'Ketua Prodi D3 Manajemen Informatika'),
+(22, '::1', 'virdiandry@poltekpos.ac.id', '$2y$08$VBkAezIK8mvI67u8Ag4i/eUeM4UimkajzEahTcq0iG9MJbiF1ReJW', NULL, 'virdiandry@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602582502, 1626857209, 1, 'Virdiandry', 'Putratama, ST., M.Kom.', '6289646817762', 'default.jpg', '116.86.227', 'Ketua Prodi D3 Manajemen Informatika'),
 (23, '::1', 'casmadi@poltekpos.ac.id', '$2y$08$NowJrBJHjUkB838FtxV0b.WpPIkr7yfDNM65ntulo4N4hqtIXCxYS', NULL, 'casmadi@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602582741, NULL, 1, 'Y.', 'Casmadi.SE., MM', '6289646817762', 'default.jpg', '101.66.022', 'Ketua Prodi D3 Akuntansi'),
 (24, '::1', 'amriyanuar@poltekpos.ac.id', '$2y$08$1azgeiO1q44b3BwPuARjqOwntrnlLA2DUsiGkGSpDbjSYL4n8pP36', NULL, 'amriyanuar@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602582792, NULL, 1, 'Amri', 'Yanuar, ST., M.MOT', '6289646817762', 'default.jpg', '116.86.207', 'Kepala Unit Center Of Technology'),
 (25, '::1', 'maniah@poltekpos.ac.id', '$2y$08$fDstrvj8XZERkNtyanoRDu93bI8qMnNt.g3jbzgY6feuXP725jlzG', NULL, 'maniah@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602582995, NULL, 1, 'Maniah,', 'S.Kom., MT.', '6289646817762', 'default.jpg', '113.67.162', 'Kepala Unit SPMI'),
 (26, '::1', 'sariarmiati@poltekpos.ac.id', '$2y$08$tecKoPGLujjTuKVavPKaHOYlMe2I10NBxObKCjP4suR4tsRxh3P42', NULL, 'sariarmiati@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602585103, NULL, 1, 'Sari', 'Armiati, S.T., M.T.', '6289646817762', 'default.jpg', '103.77.054', 'Kepala Unit LPPM'),
 (27, '::1', 'syafrial.fachri@poltekpos.ac.id', '$2y$08$cUX9I8lvYN6w0wuQzBVZYO4din1juOTBL2nl85.ls3Ctn1Mv9/gGO', NULL, 'syafrial.fachri@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602585155, NULL, 1, 'Syafrial Fachri', 'Pane, ST., M.T.I.,EBDP', '6289646817762', 'default.jpg', '117.88.233', 'Kepala Unit TIK'),
 (28, '::1', 'widiaresdiana@poltekpos.ac.id', '$2y$08$.ik.LJAfQxzV.8MDQe26hutzhlP9ebWDnLJPkRT1dJi8nb4PAaE96', NULL, 'widiaresdiana@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602585281, NULL, 1, 'Widia', 'Resdiana, S.S., M.Pd.', '6289646817762', 'default.jpg', '104.79.072', 'Kepala Unit Bahasa dan Perpustakaan'),
-(29, '::1', 'irma@poltekpos.ac.id', '$2y$08$y2hzQ0VY6qtWPYMEMbaodusgO0oeNtjLo.BJR8bLF37sxjwTd26eK', NULL, 'irma@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602585337, NULL, 1, 'Irma', 'Rahmawati', '6289646817762', 'default.jpg', '111.11.111', 'Kepala Unit BAAK'),
+(29, '::1', 'irma@poltekpos.ac.id', '$2y$08$y2hzQ0VY6qtWPYMEMbaodusgO0oeNtjLo.BJR8bLF37sxjwTd26eK', NULL, 'irma@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602585337, 1626846722, 1, 'Irma', 'Rahmawati', '6289646817762', 'default.jpg', '111.11.111', 'Kepala Unit BAAK'),
 (30, '::1', 'pupung@poltekpos.ac.id', '$2y$08$4LdMO.M.KtFrUfSIJnJcA.GlYiQfcLD3PyOJZTut5f.5RTU5.DXnS', NULL, 'pupung@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602585378, NULL, 1, 'Pupung', 'Pujiastuti', '6289646817762', 'default.jpg', '111.11.111', 'Kepala Unit Keuangan'),
 (31, '::1', 'achmadandriyanto@poltekpos.ac.id', '$2y$08$YrY2RPjybN2mNJQaiClYiOSznPsX.ow910XkpyXvPvCDLsv5/QzHK', NULL, 'achmadandriyanto@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602585425, NULL, 1, 'Achmad', 'Andriyanto, ST., MT.', '6289646817762', 'default.jpg', '116.86.204', 'Ketua Prodi D3 Administrasi Logistik'),
 (32, '::1', 'roniandarsyah@poltekpos.ac.id', '$2y$08$CaNsKoJSJlweB6T9OmO.AeBx5tgVCzDMkigACc1vjlQ4fvsYAIV8q', NULL, 'roniandarsyah@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602585690, NULL, 1, 'Roni', 'Andarsyah, ST., M.Kom.', '6289646817762', 'default.jpg', '115.88.193', 'Kemahasiswaan'),
 (33, '::1', 'dodi@poltekpos.ac.id', '$2y$08$prKhhNXba0tdth0sn7j1WeZRbvL461ESxp69mx8DDzA8dPxElu/9a', NULL, 'dodi@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602585726, 1626516648, 1, 'Dodi', 'Permadi, S.T.,M.T.', '6289646817762', 'default.jpg', '107.77.117', 'Wakil Direktur 1'),
 (34, '::1', 'edisupardi@poltekpos.ac.id', '$2y$08$FU39DRTe7LMxaMmYRNRDueJQRZ/mBhGpR9qGWKV1T8GY8Xl8.dlEa', NULL, 'edisupardi@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602585778, NULL, 1, 'Edi', 'Supardi, SE., MM., AAAIK.', '6289646817762', 'default.jpg', '114.74.180', 'Wakil Direktur 2'),
-(35, '::1', 'hilmansetiadi@poltekpos.ac.id', '$2y$08$fEcc157o09RnO.vLVdey5u0Wi1RHLtNXZ1dk7oFudE3xY4BmpCFUe', NULL, 'hilmansetiadi@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602585839, 1626516607, 1, 'Hilman', 'Setiadi, SE., S.Pd., MT.', '6289646817762', 'default.jpg', '101.66.010', 'Wakil Direktur 3'),
-(36, '::1', 'asep@poltekpos.ac.id', '$2y$08$uz6R4azscDrTX8oZs2.WNOlab/Clp/O3Ml.Omi2NvJ.N5xNgajMBu', NULL, 'asep@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602585878, 1624179468, 1, 'Asep', 'Gumilar', '6289646817762', 'default.jpg', '111.11.111', 'Staff Direktur'),
+(35, '::1', 'hilmansetiadi@poltekpos.ac.id', '$2y$08$fEcc157o09RnO.vLVdey5u0Wi1RHLtNXZ1dk7oFudE3xY4BmpCFUe', NULL, 'hilmansetiadi@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602585839, 1626856892, 1, 'Hilman', 'Setiadi, SE., S.Pd., MT.', '6289646817762', 'default.jpg', '101.66.010', 'Wakil Direktur 3'),
+(36, '::1', 'asep@poltekpos.ac.id', '$2y$08$uz6R4azscDrTX8oZs2.WNOlab/Clp/O3Ml.Omi2NvJ.N5xNgajMBu', NULL, 'asep@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602585878, 1627024387, 1, 'Asep', 'Gumilar', '6289646817762', 'default.jpg', '111.11.111', 'Staff Direktur'),
 (37, '::1', 'muhammad.akbar5999@gmail.com', '$2y$08$rXzeANODBmDonZrLt6vwb.SmD/DEUHaj3EFz4RAVTSZIZC5dyZ6Oi', NULL, 'muhammad.akbar5999@gmail.com', NULL, NULL, NULL, NULL, 1602586215, 1624175230, 1, 'Akbar', 'MI', '089646817762', 'default.jpg', '2193013', 'Mahasiswa'),
 (38, '::1', 'supono@poltekpos.ac.id', '$2y$08$zE0dNKnaU7dkLN7iYGQezuCD4KFEq7wzZE.acpZ/vs.R9AQTtH3We', NULL, 'supono@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1602586274, 1604537782, 1, 'Supono', 'Syafiq', '6289646817762', 'default.jpg', '111.11.111', 'Dosen'),
-(39, '::1', 'tetyrohayati@poltekpos.ac.id', '$2y$08$PLHF3b8ZsS6CU0leU0agAe1nd0c.kHNWdXB1pcSpm8PvhR7g//aXy', NULL, 'tetyrohayati@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1603410953, NULL, 1, 'Tety', 'Rohayati', '6289646817762', 'default.jpg', '111.11.111', 'Staff Wadir 1'),
-(40, '::1', 'nazzilla@muhakbar.com', '$2y$08$Lm82kvQAM0kTsq8sUOZVvOSiLUD7zXNk5LKcXMlEH4o8rtaWJTnBK', NULL, 'nazzilla@muhakbar.com', NULL, NULL, NULL, NULL, 1617358926, 1626516727, 1, 'Nazzilla', 'Putri', '6289646817762', 'default.jpg', '111.11.111', 'Mahasiswa'),
+(39, '::1', 'tetyrohayati@poltekpos.ac.id', '$2y$08$PLHF3b8ZsS6CU0leU0agAe1nd0c.kHNWdXB1pcSpm8PvhR7g//aXy', NULL, 'tetyrohayati@poltekpos.ac.id', NULL, NULL, NULL, NULL, 1603410953, 1626846637, 1, 'Tety', 'Rohayati', '6289646817762', 'default.jpg', '111.11.111', 'Staff Wadir 1'),
+(40, '::1', 'nazzilla@muhakbar.com', '$2y$08$Lm82kvQAM0kTsq8sUOZVvOSiLUD7zXNk5LKcXMlEH4o8rtaWJTnBK', NULL, 'nazzilla@muhakbar.com', NULL, NULL, NULL, NULL, 1617358926, 1626850988, 1, 'Nazzilla', 'Auliya', '6289646817762', 'default.jpg', '111.11.111', 'Mahasiswa'),
 (41, '::1', 'unit01@gmail.com', '$2y$08$dCrFqvttMim95VNY3vPQm.Lj6.pwM2JiQF8RgQNWc7qOQi3Xoggtu', NULL, 'unit01@gmail.com', NULL, NULL, NULL, NULL, 1625581413, 1626516718, 1, 'Unit', '01', '89646817762', 'default.jpg', '12345666777', 'Unit'),
-(42, '::1', 'direktur01@gmail.com', '$2y$08$fntO1DA38P5.Jlpm7q/IV.BhkhDsxyr8./ECsILR37kLiO.cF4ODS', NULL, 'direktur01@gmail.com', NULL, NULL, NULL, NULL, 1625581458, 1626516639, 1, 'direktur', '01', '89646817762', 'default.jpg', '2132132136', 'Direktur'),
+(42, '::1', 'direktur01@gmail.com', '$2y$08$fntO1DA38P5.Jlpm7q/IV.BhkhDsxyr8./ECsILR37kLiO.cF4ODS', NULL, 'direktur01@gmail.com', NULL, NULL, NULL, NULL, 1625581458, 1626846674, 1, 'direktur', '01', '89646817762', 'default.jpg', '2132132136', 'Direktur'),
 (43, '::1', 'staff01@gmail.com', '$2y$08$J/brbxm72E/NGjEQZ5RJpOH81uZf./1LoCRP69IUWeBnuAwNgbOpK', NULL, 'staff01@gmail.com', NULL, NULL, NULL, NULL, 1625581595, 1626516571, 1, 'staff', '01', '89646817762', 'default.jpg', '123455665', 'Staf Direktur'),
-(44, '::1', 'unit02@gmail.com', '$2y$08$xj4oB5lkOBky4r0szAVAUO5Kkk7ZQzg9a0PdHe1UP/2uDy0ycp.9O', NULL, 'unit02@gmail.com', NULL, NULL, NULL, NULL, 1625581781, 1626518316, 1, 'Unit', '02', '89646817762', 'default.jpg', '2163761', 'Ka Prodi'),
-(45, '::1', 'aksdbkjanskjas@kjasndkj.sadasd', '$2y$08$hDWpkRHm8FuEn9vPgx925.vD.xppRvagqtfqA98uE9.vsBf1DNuva', NULL, 'aksdbkjanskjas@kjasndkj.sadasd', NULL, NULL, NULL, NULL, 1625842435, NULL, 1, 'asdsad', 'asdsad', 'asdasd', 'default.jpg', '87786876786', 'sandkjnasd'),
-(46, '::1', 'aksdbkjanskjas@kjasnsdkj.sadasd', '$2y$08$IMGLydamawCSfnACHxSSvOkh.UfrJrea5FPSLb/28fMvZNaQiKQWS', NULL, 'aksdbkjanskjas@kjasnsdkj.sadasd', NULL, NULL, NULL, NULL, 1625842464, NULL, 1, 'asdsad', 'asdsad', 'asdasd', 'default.jpg', '87786876786', 'sandkjnasd');
+(44, '::1', 'unit02@gmail.com', '$2y$08$xj4oB5lkOBky4r0szAVAUO5Kkk7ZQzg9a0PdHe1UP/2uDy0ycp.9O', NULL, 'unit02@gmail.com', NULL, NULL, NULL, NULL, 1625581781, 1626518316, 1, 'Unit', '02', '89646817762', 'default.jpg', '2163761', 'Ka Prodi');
 
 -- --------------------------------------------------------
 
@@ -688,14 +701,12 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (61, 36, 29),
 (62, 37, 2),
 (63, 38, 2),
-(88, 39, 31),
-(89, 40, 2),
+(102, 39, 28),
+(101, 40, 28),
 (94, 41, 28),
 (93, 42, 8),
 (95, 43, 29),
-(96, 44, 28),
-(97, 45, 28),
-(98, 46, 28);
+(96, 44, 28);
 
 -- --------------------------------------------------------
 
@@ -911,19 +922,19 @@ ALTER TABLE `permission`
 -- AUTO_INCREMENT for table `surat`
 --
 ALTER TABLE `surat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `surat_lampiran`
 --
 ALTER TABLE `surat_lampiran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tembusan`
 --
 ALTER TABLE `tembusan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `template_notif`
@@ -935,7 +946,7 @@ ALTER TABLE `template_notif`
 -- AUTO_INCREMENT for table `tujuan`
 --
 ALTER TABLE `tujuan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -947,7 +958,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_groups`
 --
 ALTER TABLE `users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

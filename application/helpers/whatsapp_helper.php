@@ -18,13 +18,14 @@ function whatsapp($kepada, $dari, $perihal, $link)
 
 	$pesan = $say_first . "\n\n" . "Ada Surat dari " . $dari . ", \nPerihal " . $perihal . " \nBuka link url ini " . $link . " \n\n" . $say_end;
 
+	telegram($pesan);
 
 	$base_url = 'https://api.zuwinda.com/v1/message/send-whatsapp';
 	$zuwinda_token = '5b7db80056694e21aeaeb46502573797';
 	$ch = curl_init($base_url);
 	$payload = json_encode(
 		array(
-			"instances_id" => "a3dd140b-fcf8-4597-b7e3-afe9779023b4",
+			"instances_id" => "d193b2e6-4ec9-42ab-9a7e-0d82d3077f48",
 			"to" => $kepada,
 			"content" => $pesan
 		)
@@ -36,4 +37,21 @@ function whatsapp($kepada, $dari, $perihal, $link)
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 	$result = curl_exec($ch);
 	curl_close($ch);
+}
+
+function telegram($message_text)
+{
+	$telegram_id = '482529152';
+	$secret_token = '1695589428:AAEg4-YX5nR3EZYkMwjaiNZrwFd2uHrkCBE';
+	$url = "https://api.telegram.org/bot" . $secret_token . "/sendMessage?chat_id=" . $telegram_id;
+	echo $url = $url . "&text=" . urlencode($message_text);
+	$ch = curl_init();
+	$optArray = array(
+		CURLOPT_URL => $url,
+		CURLOPT_RETURNTRANSFER => true
+	);
+	curl_setopt_array($ch, $optArray);
+	$result = curl_exec($ch);
+	curl_close($ch);
+	// return $result;
 }
